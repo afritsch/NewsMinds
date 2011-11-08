@@ -2,6 +2,12 @@ Qpt2a::Application.routes.draw do
   
   get "home/index"
 
+  get "user/login"
+  get "user/logout"
+  resources :user
+    match 'login' => "User#login", :as => "login"
+    match 'logout' => "User#logout", :as => "logout"
+
   get "daly_news/chooseTheme"
   get "daly_news/voteForTheme" 
   resources :daly_news
