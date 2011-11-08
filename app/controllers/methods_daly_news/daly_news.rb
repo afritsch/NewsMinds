@@ -12,7 +12,8 @@ class DalyNewsHandler
   def isUpToDate
    
     # first item of rss is up to date so first instead of last 
-    if ((DalyNews.first.date.slice(5..6) <=> Time.now.to_s.slice(8..9)) == 0) :  return true
+    if ((DalyNews.first.date.slice(5..6) <=> Time.now.to_s.slice(8..9)) == 0)
+      return true
     else
       return false
     end
@@ -70,12 +71,20 @@ class DalyNewsHandler
   end
   
   
+  # ereases all entries except of the youngest
   def ereaseOldTopStoryEntries
-   
-    # ereases all entries except of the youngest
     for i in 0...TopStory.count-1
       TopStory.first.destroy
     end
+  end
+ 
+  # checks if a top story is chosen today 
+  def hasGotTopStory
+    if ((Time.now.to_s.slice(8..9) <=> TopStory.last.pubDate.slice(8..9)) == 0)
+      return true
+    else
+      return false
+    end 
   end
 
 end

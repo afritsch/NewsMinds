@@ -19,8 +19,11 @@
 			<% if TopStory.all.count != 0 %>
                           <li class="style2"><%= link_to 'Tagesthema', top_stories_path %></li>
                         <% end %>
-
+                         
+                        <% handler = DalyNewsHandler.new %>
+                        <% if !handler.hasGotTopStory %>
 			<li class="style2"><%= link_to 'Thema wählen', "chooseTheme" %></li>
+                        <% end %>
 			<li class="style2"><a href="products/products.htm">Posts anzeigen</a></li>
 			<li><a href="services/services.htm">Post einfügen</a></li>
 			<li><a href="calendar/calendar.htm">Kalender</a></li>
