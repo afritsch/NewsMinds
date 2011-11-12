@@ -1,20 +1,27 @@
 Qpt2a::Application.routes.draw do
   
-  get "home/index"
-
   get "user/login"
   get "user/logout"
+  get "user/register"
+ 
   resources :user
     match 'login' => "User#login", :as => "login"
     match 'logout' => "User#logout", :as => "logout"
+    match 'register' => "User#registration", :as => "register"
+    match 'checkUser' => "User#checkUser", :as => "check_user"
+
 
   get "daly_news/chooseTheme"
   get "daly_news/voteForTheme" 
+
   resources :daly_news
     match 'chooseTheme' => "DalyNews#chooseTheme"
     match 'votedTheme/:id' => "DalyNews#voteForTheme"
-  
+ 
+ 
+  get "top_stories/discussion"
   get "top_stories/selectPrevDays"
+
   resources :top_stories
     match 'themeOfDay' => "TopStories#discussion", :as => "top_stories"  
     match 'prevDays/:pubDate' => "TopStories#selectPrevDays", :as => "prev_days"     
@@ -69,6 +76,8 @@ Qpt2a::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+
+  get "home/index"
   root :to => "Home#index"
   
   # See how all your routes lay out with "rake routes"
