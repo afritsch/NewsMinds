@@ -48,10 +48,12 @@ class UserController < ApplicationController
  
   def create
     @user = User.new(params[:user])
-  
+    
+    @doesNotExist = User.where(:username => @user.username, :password => @user.password)
+    
     respond_to do |format|
 
-      if (User.where( :username => @user.username ) == nil && User.where( :password => @user.password ) == nil)
+      if @doesNotExist.empty? 
 
         @user.numberOfPosPosts = 0 
 
@@ -61,12 +63,13 @@ class UserController < ApplicationController
  
         @user.save
         
-        format.html  { redirect_to(@user,
-                      :notice => 'User was successfully created.') }
+        format.html  { redirect_to(root_path,
+                      :notice => "User erfolgreich erzeugt") }
         format.json  { render :json => @user,
                       :status => :created, :location => root_path }
       else
-        format.html  { render :action => "login" }
+        format.html  { redirect_to(root_path,
+                      :notice => "Username oder Passwort schon vorhanden") }
         format.json  { render :json => @user.errors,
                       :status => :unprocessable_entity }
       end

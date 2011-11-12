@@ -1,16 +1,5 @@
 ﻿<h1>Registrierung:</h1>
- 
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-  <div id="errorExplanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this post from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+<%= form_for @user, :url => { :action => "create" } do |f| %> 
  
   <div class="field">
     <%= f.label :username %><br />
