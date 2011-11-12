@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  username: MyString
+  password: MyString
+  numberOfPosPosts: 1
+  numberOfNegPosts: 1
+  mind: 1
+
+two:
+  username: MyString
+  password: MyString
+  numberOfPosPosts: 1
+  numberOfNegPosts: 1
+  mind: 1

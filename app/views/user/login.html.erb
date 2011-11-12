@@ -1,0 +1,58 @@
+<!-- get stories up to date -->
+<!-- <?php include "../topstory_lib/load_topStories.php" ?> -->
+
+
+<!-- Begin Container -->
+<div id="container" style="height: 140%; width: 685px">
+	<!-- Begin Masthead -->
+	<div id="masthead">
+		<a href="./"><img alt="NewsMinds Logo" height="50" src="images/logo.jpg" width="50" />
+		</a>
+		<h3>Posts, die mehr bewegen</h3>		
+	</div>
+	<!-- End Masthead -->
+	<!-- Begin Navigation -->
+	<div id="navigation">
+		<ul>
+			<li class="style2"><a href="default.html">Login</a></li>
+
+			<% if TopStory.all.count != 0 %>
+                          <li class="style2"><%= link_to 'Tagesthema', top_stories_path %></li>
+                        <% end %>
+                         
+                        <% handler = DalyNewsHandler.new %>
+                        <% if !handler.hasGotTopStory %>
+			<li class="style2"><%= link_to 'Thema wählen', "chooseTheme" %></li>
+                        <% end %>
+			<li class="style2"><a href="products/products.htm">Posts anzeigen</a></li>
+			<li><a href="services/services.htm">Post einfügen</a></li>
+			<li><a href="calendar/calendar.htm">Kalender</a></li>
+			<li><a href="contact/contact.htm">Kontakt</a></li>
+		</ul>
+	</div>
+	<!-- End Navigation -->
+	<!-- Begin Page Content -->
+	<div id="page_content">
+		<!-- Begin Left Column -->
+		<div id="column_l">
+			<b>Das ist die Startseite</b>	
+		</div>
+		<!-- End Left Column -->
+		<!-- End Right Column --->
+		<div id="column_r" style="right: 10px; top: 0px; float: right">
+			<img src="https://chart.googleapis.com/chart?chs=140x90&amp;cht=gom&amp;chd=t:40&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|Gesinnung|1:|Teuflisch            |               Engelsgleich" />
+		</div>
+		<!-- End Right Column --></div>
+	<!-- End Page Content -->
+	<!-- Begin Footer -->
+	<div id="footer">
+		<p>Letzten Tage</p>
+		<p>
+		<% all_stories = TopStory.all %> 	
+                <% for i in 0...all_stories.count do %>
+                  <%= link_to all_stories[i].pubDate.slice(4..10), "prevDays/" + all_stories[i].pubDate %> | 
+                <% end %> 	
+		</p>
+	</div>
+	<!-- End Footer --></div>
+<!-- End Container -->
