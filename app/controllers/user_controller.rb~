@@ -1,6 +1,9 @@
 
 class UserController < ApplicationController
 
+  def login
+  end
+
   def logout
     session.delete(:username)
     
@@ -62,7 +65,7 @@ class UserController < ApplicationController
           format.html  { redirect_to(root_path, :notice => "User erfolgreich erzeugt") }
           format.json  { render :json => @user, :status => :created, :location => root_path }
         else
-	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gueltig") }
+	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gültig") }
           format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
       else

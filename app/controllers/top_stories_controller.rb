@@ -14,7 +14,7 @@ class TopStoriesController < ApplicationController
   
   def selectPrevDays
     
-    @top_stories = TopStory.where( :pubDate => params[:pubDate] )
+    @top_stories = TopStory.where( :id => params[:id] )
     
     respond_to do |format|
       format.html

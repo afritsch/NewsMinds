@@ -5,18 +5,17 @@ Qpt2a::Application.routes.draw do
   get "user/register"
  
   resources :user
-    match 'login' => "User#login", :as => "login"
     match 'logout' => "User#logout", :as => "logout"
     match 'register' => "User#registration", :as => "register"
     match 'checkUser' => "User#checkUser", :as => "check_user"
     match 'User/create' => "User#create", :as => "create"
-
+  
 
   get "daly_news/chooseTheme"
   get "daly_news/voteForTheme" 
 
   resources :daly_news
-    match 'chooseTheme' => "DalyNews#chooseTheme"
+    match 'chooseTheme' => "DalyNews#chooseTheme", :as => "choose_theme"
     match 'votedTheme/:id' => "DalyNews#voteForTheme"
  
  
@@ -25,7 +24,7 @@ Qpt2a::Application.routes.draw do
 
   resources :top_stories
     match 'themeOfDay' => "TopStories#discussion", :as => "top_stories"  
-    match 'prevDays/:pubDate' => "TopStories#selectPrevDays", :as => "prev_days"     
+    match 'prevDays/:id' => "TopStories#selectPrevDays", :as => "prev_days"     
  
  
   # The priority is based upon order of creation:
