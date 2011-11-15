@@ -64,7 +64,9 @@ NewsMinds
 <div id="menu">
 <ul>
 <li><%= link_to 'Home', root_path %></li>
+<% if session[:username] != nil %>
 <li><%= link_to 'Posts', root_path %></li>
+<% end %>
 <li><%= link_to 'Tagesthema', top_stories_path %></li>
 
 <% handler = DalyNewsHandler.new %>
@@ -78,8 +80,15 @@ NewsMinds
 
 <div id="main">
 
+<div id="content">
+
+<% if flash[:notice] %>
+	<div id="notice"><%= flash[:notice] %></div>
+<% end %>
 
 <%= yield %>
+
+</div>
 
 </div>
 <div id="rightbar">
