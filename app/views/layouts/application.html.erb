@@ -107,13 +107,13 @@ NewsMinds
 <div id="footer">
 
 <% all_stories = TopStory.all %> 	
-                <% for i in 0...all_stories.count do %>
-                  <%= link_to all_stories[i].pubDate.slice(4..10), prev_days_path(all_stories[i].id) %> | 
-                <% end %>
-</p>
-<p>
+    <% for i in 0...all_stories.count do %>
+      <%= link_to all_stories[i].pubDate.slice(4..10), prev_days_path(all_stories[i].id) %>
+    <% end %>
+
+<div>
 (c) Brünner + Fritsch 11.2011
-</p>
+</div>
 </div>
 
 </div>

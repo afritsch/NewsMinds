@@ -44,7 +44,9 @@ class UserController < ApplicationController
   def create
     @user = User.new(params[:user])
     
-    @doesNotExist = User.where(:username => @user.username, :password => @user.password)
+    @user.username = @user.username.upcase
+    
+    @doesNotExist = User.where(:username => @user.username)
     
     respond_to do |format|
 
@@ -66,7 +68,7 @@ class UserController < ApplicationController
           format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
       else
-        format.html  { redirect_to(root_path, :notice => "Username oder Passwort schon vorhanden") }
+        format.html  { redirect_to(root_path, :notice => "Username schon vorhanden") }
         format.json  { render :json => @user.errors, :status => :unprocessable_entity }
       end
     end
