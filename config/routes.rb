@@ -3,7 +3,7 @@ Qpt2a::Application.routes.draw do
   get "user/login"
   get "user/logout"
   get "user/register"
- 
+  
   resources :user
     match 'logout' => "User#logout", :as => "logout"
     match 'register' => "User#registration", :as => "register"
@@ -36,7 +36,7 @@ Qpt2a::Application.routes.draw do
     match "post/:id/edit" => "Posts#edit", :as => "edit_post"
     match "posts" => "Posts#index", :as => "posts"
  
-    
+
   get "home/index"
   root :to => "Home#index"
   
