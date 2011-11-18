@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  
-    redirect_to(root_path, :notice => "Kommentar geändert")
+    redirect_to(root_path, :notice => "Kommentar erfolgreich geändert")
   end 
 
 end

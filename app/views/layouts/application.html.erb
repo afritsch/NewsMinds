@@ -64,15 +64,15 @@ NewsMinds
 <div id="menu">
 <ul>
 <li><%= link_to 'Home', root_path %></li>
-<% if session[:username] != nil %>
-<li><%= link_to 'Posts', posts_path %></li>
-<% end %>
-
 <% handler = DalyNewsHandler.new %>
 <% if handler.hasGotTopStory %>
 	<li><%= link_to 'Tagesthema', top_stories_path %></li>
 <% else %>
 	<li><%= link_to 'Themenwahl', choose_theme_path %></li>
+<% end %>
+
+<% if session[:username] != nil %>
+<li><%= link_to 'Posts', posts_path %></li>
 <% end %>
 
 <li><a href="#">Leer</a></li>
@@ -93,11 +93,9 @@ NewsMinds
 
 </div>
 <div id="rightbar">
-<h3>H3</h3>
-<div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
-<h3>H3</h3>
-<div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
-<h3>H3</h3>
+
+<%= content_for :user_data %>
+
 <div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
 <h3>H3</h3>
 <div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
@@ -111,7 +109,7 @@ NewsMinds
     <% for i in 0...all_stories.count do %>
       <%= link_to all_stories[i].pubDate.slice(4..10), prev_days_path(all_stories[i].id) %>
       <b>|</b>
-    <% end %>
+<% end %>
 
 <div>
 (c) Brünner + Fritsch 11.2011
