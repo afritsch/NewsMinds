@@ -32,8 +32,8 @@ Qpt2a::Application.routes.draw do
   get "posts/edit"
 
   resources :posts
-    match "post/:id" => "Posts#new", :as => "post"
-    match "post/:id/edit" => "Posts#edit", :as => "edit_post"
+    match "posts/:top_story_id/new" => "Posts#new", :as => "new_post"
+    match "posts/:id/edit" => "Posts#edit", :as => "edit_post"
     match "posts" => "Posts#index", :as => "posts"
  
 

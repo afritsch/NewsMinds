@@ -6,6 +6,8 @@
 <tr><td><h4><%= raw @latest_top_story.title %></h4></td></tr><tr><td><%= raw @latest_top_story.description %></td></tr> 
 
 </table>
+
+<%= link_to 'Post erstellen', new_post_path(@latest_top_story.id) %>
 <hr />
 
 <table>	

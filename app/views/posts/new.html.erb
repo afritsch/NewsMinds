@@ -1,76 +1,17 @@
-<<<<<<< HEAD
-﻿
-=======
-﻿<!-- get stories up to date -->
-<!-- <?php include "../topstory_lib/load_topStories.php" ?> -->
+﻿<% form_for(@post) do |p| %>
 
+<%= hidden_field_tag(:top_story_id, @top_story_id) %>
+<%= hidden_field_tag(:user_id, @user_id) %>
 
-<!-- Begin Container -->
-<div id="container" style="height: 140%; width: 685px">
-	<!-- Begin Masthead -->
-	<div id="masthead">
-		<a href="./"><img alt="NewsMinds Logo" height="50" src="images/logo.jpg" width="50" />
-		</a>
-		<h3>Posts, die mehr bewegen</h3>		
-	</div>
-	<!-- End Masthead -->
-	<!-- Begin Navigation -->
-	<div id="navigation">
-		<ul>
-		<% if session[:username].nil? %>
-			<li class="style2">
-<%= link_to 'Login', login_path %>
-  	        <% else %>
-                        <li class="style2">
-<%= link_to session[:username]+' Logout', logout_path %>	
-                <% end %>
-</li>
-			<li class="style2">
-<%= link_to 'Registrieren', register_path %>
+<b>Titel:</b>
+<%= p.text_field :title %>
 
-</li>
+<p>Inhalt:<p>
+<%= p.text_area :content %>
 
-			<% if TopStory.all.count != 0 %>
-                          <li class="style2"><%= link_to 'Tagesthema', top_stories_path %></li>
-                        <% end %>
-                         
-                        <% handler = DalyNewsHandler.new %>
-                        <% if !handler.hasGotTopStory %>
-			<li class="style2"><%= link_to 'Thema wählen', "chooseTheme" %></li>
-                        <% end %>
-			<li class="style2"><%= link_to "Posts anzeigen", posts_path %></li>
-			<li><%= link_to 'Post einfügen', entry_post_path %></li>
-			<li><a href="calendar/calendar.htm">Kalender</a></li>
-			<li><a href="contact/contact.htm">Kontakt</a></li>
-		</ul>
-	</div>
-	<!-- End Navigation -->
-	<!-- Begin Page Content -->
-	<div id="page_content">
-		<!-- Begin Left Column -->
-		<div id="column_l">
-			<b>Hier kann der User Posts einfügen</b>
-			<% if flash[:notice] %>
-                          <div id="notice"><%= flash[:notice] %></div>
-			<% end %>	
-		</div>
-		<!-- End Left Column -->
-		<!-- End Right Column --->
-		<div id="column_r" style="right: 10px; top: 0px; float: right">
-			<img src="https://chart.googleapis.com/chart?chs=140x90&amp;cht=gom&amp;chd=t:40&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|Gesinnung|1:|Teuflisch            |               Engelsgleich" />
-		</div>
-		<!-- End Right Column --></div>
-	<!-- End Page Content -->
-	<!-- Begin Footer -->
-	<div id="footer">
-		<p>Letzten Tage</p>
-		<p>
-		<% all_stories = TopStory.all %> 	
-                <% for i in 0...all_stories.count do %>
-                  <%= link_to all_stories[i].pubDate.slice(4..10), "prevDays/" + all_stories[i].pubDate %> | 
-                <% end %> 	
-		</p>
-	</div>
-	<!-- End Footer --></div>
-<!-- End Container -->
->>>>>>> d2c857e564de9e2786e5767cba1bbd851526b213
+<p>Bewertung</p>
+<%= p.text_field :estimation %>
+
+<%= p.submit 'Erstellen' %>
+
+<% end %>

@@ -9,12 +9,32 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
+
+    @top_story_id = params[:top_story_id]
+    @user_id = User.where( :username => session[:username] ).first.id
+ 
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @post }
+    end 
   end
  
+  def create
+
+    @post = Post.create( params[:post] ) 
+    @post.top_story_id = params[:top_story_id]
+    @post.user_id = params[:user_id]
+    @post.save
+
+    respond_to do |format|
+      format.html { redirect_to(top_stories_path, :notice => "Post erfolgreich erstellt") }
+      format.xml { render :xml => @post }
+    end
+
+  end
+
   def edit
   end
   
-  def create
-  end
-
 end

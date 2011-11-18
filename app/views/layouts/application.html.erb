@@ -83,7 +83,7 @@ NewsMinds
 
 <div id="content">
 
-<% if flash[:notice] %>
+<% if flash[:notice] != nil %>
 	<div id="notice"><%= flash[:notice] %></div>
 <% end %>
 

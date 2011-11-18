@@ -18,20 +18,32 @@ class DalyNewsController < ApplicationController
   end
   
   def voteForTheme
-    
-    @voted_news = DalyNews.where( :id => params[:id] )
-    @voted_news[0].clicks += 1
-    @voted_news[0].save
    
-    handler = DalyNewsHandler.new
+    if cookies[:voted] != nil 
 
-    # if new news is selected, insert it into top_news database    
-    handler.checkAndInsertNewsIntoTopStoryDatabase
+      respond_to do |format|
+        format.html { redirect_to(root_path, :notice => "Du hast schon abgestimmt") }
+        format.xml { render :xml => @voted_news }
+      end
 
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @voted_news }
-    end
- 
+    else
+      
+      cookies[:voted] = { :value => "voted", :expires => 24.hours.from_now } 
+
+      @voted_news = DalyNews.where( :id => params[:id] )
+      @voted_news[0].clicks += 1
+      @voted_news[0].save
+     
+      handler = DalyNewsHandler.new
+
+      # if new news is selected, insert it into top_news database    
+      handler.checkAndInsertNewsIntoTopStoryDatabase
+
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => @voted_news }
+      end
+    end 
+
   end
 end
