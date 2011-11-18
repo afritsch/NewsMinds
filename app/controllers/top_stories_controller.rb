@@ -5,11 +5,6 @@ class TopStoriesController < ApplicationController
   def discussion 
     
     @latest_top_story = TopStory.last
-    @usernames = []
- 
-    @latest_top_story.posts.each do |post|  
-      @usernames.push( User.where( :id => post.user_id ).first.username ) 
-    end
 
     respond_to do |format|
       format.html # index.html.erb
