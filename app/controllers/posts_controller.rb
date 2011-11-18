@@ -35,6 +35,20 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find( params[:id] )
+
+    respond_to do |format|
+      format.html      
+      format.xml { render :xml => @post }
+    end
+
   end
   
+  def update
+    @post = Post.find( params[:id] )
+    @post.update_attributes( params[:post] )
+ 
+    redirect_to(root_path, :notice => "Kommentar geändert")
+  end 
+
 end

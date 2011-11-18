@@ -1,1 +1,16 @@
-﻿
+﻿<% form_for(@post) do |p| %>
+
+<%= hidden_field_tag(:id, @post.id) %>
+
+<b>Titel:</b>
+<%= p.text_field :title %>
+
+<p>Inhalt:<p>
+<%= p.text_area :content %>
+
+<p>Bewertung</p>
+<%= p.text_field :estimation %>
+
+<%= p.submit 'Erstellen' %>
+
+<% end %>

@@ -3,4 +3,5 @@
 <b><%= post.title %></b>
 <p><%= post.content %></p>
 <p><%= post.estimation %></p>
+<p><%= link_to 'Kommentar ändern', edit_post_path(post.id) %>
 <% end %>
