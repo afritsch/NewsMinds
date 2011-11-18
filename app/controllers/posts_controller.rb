@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
+  before_filter :get_post, :only => [:edit, :update]
+
+  def get_post
+    @post = Post.find( params[:id] )
+  end
+
   def index
-    @posts = User.where( :username => session[:username] )[0].posts
+    @posts = User.where( :username => session[:username] ).first.posts
  
     respond_to do |format|
       format.html
@@ -45,8 +51,7 @@ class PostsController < ApplicationController
   end
   
   def update
-    @post = Post.find( params[:id] )
-    @post.update_attributes( params[:post] )
+    Post.find( params[:id] ).update_attributes( params[:post] )
  
     redirect_to(root_path, :notice => "Kommentar geändert")
   end 
