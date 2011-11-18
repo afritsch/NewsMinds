@@ -1,14 +1,24 @@
 ﻿<h2>Tagesthema</h2>
 
-			<table>
-			<% if @latest_top_story != nil %>
+<table>
+<% if @latest_top_story != nil %>
 				
-			<tr><td><h4><%= raw @latest_top_story.title %></h4></td></tr><tr><td><%= raw @latest_top_story.description %></td></tr> 
-			
-			<% else %>
-			    <tr><td>Es wurde noch kein Thema als Tagesthema gewählt</td></tr> 
-			<% end %>
+<tr><td><h4><%= raw @latest_top_story.title %></h4></td></tr><tr><td><%= raw @latest_top_story.description %></td></tr> 
 
-			</table>
+</table>
+<hr />
 
-			<hr />
+<table>	
+<% @latest_top_story.posts.each do |post| %>
+
+<tr><td><%= post.title %></td></tr>
+<tr><td><%= post.content %></td></tr>
+<tr><td><%= post.estimation %></td></tr>
+
+<% end %>
+
+</table>		
+
+<% else %>
+    <b>Es wurde noch kein Thema als Tagesthema gewählt</b> 
+<% end %>
