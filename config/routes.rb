@@ -9,7 +9,7 @@ Qpt2a::Application.routes.draw do
     match 'register' => "User#registration", :as => "register"
     match 'checkUser' => "User#checkUser", :as => "check_user"
     match 'User/create' => "User#create", :as => "create"
-  
+    match 'changeMind/:answer/:post_estimation' => "User#changeMind", :as => "user_change_mind"  
 
   get "daly_news/chooseTheme"
   get "daly_news/voteForTheme" 

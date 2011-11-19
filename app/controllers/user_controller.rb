@@ -1,6 +1,23 @@
 
 class UserController < ApplicationController
 
+  def changeMind
+    @user = User.where( :username => session[:username] ).first
+
+    if params[:post_estimation] == params[:answer]
+      @user.mind += 1
+      @user.numberOfPosPosts += 1
+    else
+      @user.mind -= 1
+      @user.numberOfNegPosts += 1
+    end
+ 
+    @user.save
+
+    redirect_to(top_stories_path, :notice => "Kommentar bewertet")
+  end
+
+
   def logout
     session.delete(:username)
     
@@ -10,6 +27,7 @@ class UserController < ApplicationController
     end
 
   end
+
 
   def checkUser
    
@@ -64,7 +82,7 @@ class UserController < ApplicationController
           format.html  { redirect_to(root_path, :notice => "User erfolgreich erzeugt") }
           format.json  { render :json => @user, :status => :created, :location => root_path }
         else
-	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gueltig") }
+	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gueltig, Username muss mindestens 4 aber maximal 12 Zeichen beinhalten und Passwort muss mindestens 6 aber maximal 15 Zeichen beinhalten.") }
           format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
       else

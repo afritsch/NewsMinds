@@ -1,8 +1,8 @@
 require 'methods_daly_news/daly_news.rb'
 
 class TopStoriesController < ApplicationController
-  
-  def discussion 
+
+  def discussion
     
     @latest_top_story = TopStory.last
 

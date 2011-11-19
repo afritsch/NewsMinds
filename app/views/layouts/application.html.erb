@@ -64,6 +64,7 @@ NewsMinds
 <div id="menu">
 <ul>
 <li><%= link_to 'Home', root_path %></li>
+
 <% handler = DalyNewsHandler.new %>
 <% if handler.hasGotTopStory %>
 	<li><%= link_to 'Tagesthema', top_stories_path %></li>
@@ -72,7 +73,7 @@ NewsMinds
 <% end %>
 
 <% if session[:username] != nil %>
-<li><%= link_to 'Posts', posts_path %></li>
+  <li><%= link_to 'Posts', posts_path %></li>
 <% end %>
 
 <li><a href="#">Leer</a></li>

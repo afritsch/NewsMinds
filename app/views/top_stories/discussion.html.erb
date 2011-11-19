@@ -16,8 +16,11 @@
 <tr><td><b>Kommentar vom User: <%= post.user.username %></b></td></tr> 
 <tr><td><%= post.title %></td></tr>
 <tr><td><%= post.content %></td></tr>
-<tr><td><%= post.estimation %></td></tr>
 
+<tr><td><%= link_to 'find ich gut', user_change_mind_path(1, post.estimation) %></td></tr>
+<tr><td><%= link_to 'find ich schlecht', user_change_mind_path(0, post.estimation) %></td></tr>
+
+<tr><td></td></tr>
 <% end %>
 
 </table>		

@@ -27,22 +27,30 @@ class DalyNewsController < ApplicationController
       end
 
     else
-      
-      cookies[:voted] = { :value => "voted", :expires => 24.hours.from_now } 
-
-      @voted_news = DalyNews.where( :id => params[:id] )
-      @voted_news[0].clicks += 1
-      @voted_news[0].save
      
-      handler = DalyNewsHandler.new
+      if session[:username] != nil
+ 
+        cookies[:voted] = { :value => "voted", :expires => 24.hours.from_now } 
 
-      # if new news is selected, insert it into top_news database    
-      handler.checkAndInsertNewsIntoTopStoryDatabase
+        @voted_news = DalyNews.where( :id => params[:id] )
+        @voted_news[0].clicks += 1
+        @voted_news[0].save
+     
+        handler = DalyNewsHandler.new
 
-      respond_to do |format|
-        format.html
-        format.xml  { render :xml => @voted_news }
+        # if new news is selected to be top story, insert it into top_news database    
+        handler.checkAndInsertNewsIntoTopStoryDatabase
+
+        respond_to do |format|
+          format.html
+          format.xml  { render :xml => @voted_news }
+        end
+
+      else
+        redirect_to(root_path, :notice => "Du musst Miglied werden, um abstimmen zu koennen")
+
       end
+
     end 
 
   end
