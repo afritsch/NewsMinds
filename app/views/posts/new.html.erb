@@ -1,6 +1,8 @@
-﻿<% form_for(@post) do |p| %>
+﻿<h2>Zum Thema: <%= @top_story.title %></h2>
 
-<%= hidden_field_tag(:top_story_id, @top_story_id) %>
+<% form_for(@post) do |p| %>
+
+<%= hidden_field_tag(:top_story_id, @top_story.id) %>
 <%= hidden_field_tag(:user_id, @user_id) %>
 
 <b>Titel:</b>
@@ -10,8 +12,9 @@
 <%= p.text_area :content %>
 
 <p>Bewertung</p>
-<%= p.text_field :estimation %>
+<b>positiv: </b><%= radio_button_tag 'estimation', "positiv" %>
+<b>negativ: </b><%= radio_button_tag 'estimation', "negativ" %>
 
-<%= p.submit 'Erstellen' %>
+<p><%= p.submit 'Erstellen' %></p>
 
 <% end %>

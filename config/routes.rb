@@ -3,16 +3,14 @@ Qpt2a::Application.routes.draw do
   resources :home
 
 
-  get "user/login"
-  get "user/logout"
   get "user/register"
-  
+
   resources :user
-    match 'logout' => "User#logout", :as => "logout"
-    match 'register' => "User#registration", :as => "register"
-    match 'checkUser' => "User#checkUser", :as => "check_user"
+    match 'User/logout' => "User#logout", :as => "logout"
+    match 'User/register' => "User#registration", :as => "register"
+    match 'User/checkUser' => "User#checkUser", :as => "check_user"
     match 'User/create' => "User#create", :as => "create"
-    match 'changeMind/:answer/:post_estimation' => "User#changeMind", :as => "user_change_mind"  
+    match 'User/changeMind/:answer/:post_estimation' => "User#changeMind", :as => "user_mind"  
 
 
   get "daly_news/chooseTheme"

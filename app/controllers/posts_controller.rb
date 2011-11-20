@@ -17,23 +17,36 @@ class PostsController < ApplicationController
 
 
   def new
-    @post = Post.new
+    if session[:username] != nil
+      @post = Post.new
 
-    @top_story_id = params[:top_story_id]
-    @user_id = User.where( :username => session[:username] ).first.id
+      @top_story = TopStory.find( params[:top_story_id] )
+
+      @user_id = User.where( :username => session[:username] ).first.id
  
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @post }
-    end 
+      respond_to do |format|
+        format.html
+        format.xml { render :xml => @post }
+      end 
+    else
+      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um einen Kommentar erstellen zu koennen")
+    end
   end
  
 
   def create
 
     @post = Post.create( params[:post] ) 
+
     @post.top_story_id = params[:top_story_id]
     @post.user_id = params[:user_id]
+
+    if params[:estimation] == "positiv" 
+      @post.estimation = 1 
+    else
+      @post.estimation = 0
+    end
+
     @post.save
 
     respond_to do |format|
@@ -58,7 +71,7 @@ class PostsController < ApplicationController
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  
-    redirect_to(root_path, :notice => "Kommentar erfolgreich geändert")
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich geändert")
   end 
   
 

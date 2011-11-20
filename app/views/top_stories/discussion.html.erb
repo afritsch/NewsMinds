@@ -17,8 +17,12 @@
 <tr><td><%= post.title %></td></tr>
 <tr><td><%= post.content %></td></tr>
 
-<tr><td><%= link_to 'find ich gut', user_change_mind_path(1, post.estimation) %></td></tr>
-<tr><td><%= link_to 'find ich schlecht', user_change_mind_path(0, post.estimation) %></td></tr>
+<% if post.user.username != session[:username] %>
+
+  <tr><td><%= link_to 'find ich gut', user_mind_path(1, post.estimation) %></td></tr>
+  <tr><td><%= link_to 'find ich schlecht', user_mind_path(0, post.estimation) %></td></tr>
+
+<% end %>
 
 <tr><td></td></tr>
 <% end %>

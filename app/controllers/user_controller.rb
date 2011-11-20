@@ -1,19 +1,23 @@
 class UserController < ApplicationController
 
   def changeMind
-    @user = User.where( :username => session[:username] ).first
+    if session[:username] != nil
+      @user = User.where( :username => session[:username] ).first
 
-    if params[:post_estimation] == params[:answer]
-      @user.mind += 1
-      @user.numberOfPosPosts += 1
-    else
-      @user.mind -= 1
-      @user.numberOfNegPosts += 1
-    end
+      if params[:post_estimation] == params[:answer]
+        @user.mind += 1
+        @user.numberOfPosPosts += 1
+      else
+        @user.mind -= 1
+        @user.numberOfNegPosts += 1
+      end
  
-    @user.save
+      @user.save
 
-    redirect_to(top_stories_path, :notice => "Kommentar bewertet")
+      redirect_to(top_stories_path, :notice => "Kommentar bewertet")
+    else
+      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu können")
+    end
   end
 
 
@@ -30,12 +34,12 @@ class UserController < ApplicationController
 
   def checkUser
    
-    @user = User.where( :username => params[:username], :password => params[:password] )
+    @user = User.where( :username => params[:username].upcase, :password => params[:password] )
 
     respond_to do |format|
 
       if !@user.empty?
-        session[:username] = params[:username] 
+        session[:username] = params[:username].upcase 
 
         format.html { redirect_to(root_path, :notice => "Du bist eingeloggt") }
         format.xml  { render :xml => {}, status => :ok }
@@ -59,7 +63,7 @@ class UserController < ApplicationController
  
  
   def create
-    @user = User.new(params[:user])
+    @user = User.create(params[:user])
     
     @user.username = @user.username.upcase
     
