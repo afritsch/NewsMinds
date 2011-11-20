@@ -17,6 +17,10 @@
   <p><%= post.estimation %></p>
 
   <p><%= link_to 'Kommentar ändern', edit_post_path(post.id) %>
-
+  <p><%= link_to 'Kommentar löschen', destroy_path(post.id) %>
   <% end %>
+
+<p><%= link_to 'Alle Kommentare löschen', destroy_all_path %></p>
+
 <% end %>
+

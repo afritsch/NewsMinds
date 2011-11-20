@@ -60,5 +60,19 @@ class PostsController < ApplicationController
  
     redirect_to(root_path, :notice => "Kommentar erfolgreich geändert")
   end 
+  
+
+  def destroy
+    User.where( :username => session[:username] ).first.posts.find( params[:id] ).destroy
+    
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich geloescht")
+  end
+
+ 
+  def destroy_all
+    User.where( :username => session[:username] ).first.posts.destroy_all
+   
+    redirect_to(posts_path, :notice => "Alle Kommentare erfolgreich geloescht")
+  end
 
 end
