@@ -5,6 +5,7 @@ class PostsController < ApplicationController
     @post = Post.find( params[:id] )
   end
 
+
   def index
     @posts = User.where( :username => session[:username] ).first.posts
  
@@ -13,6 +14,7 @@ class PostsController < ApplicationController
       format.xml { render :xml => @posts }
     end
   end
+
 
   def new
     @post = Post.new
@@ -26,6 +28,7 @@ class PostsController < ApplicationController
     end 
   end
  
+
   def create
 
     @post = Post.create( params[:post] ) 
@@ -40,6 +43,7 @@ class PostsController < ApplicationController
 
   end
 
+
   def edit
     @post = Post.find( params[:id] )
 
@@ -50,6 +54,7 @@ class PostsController < ApplicationController
 
   end
   
+
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  

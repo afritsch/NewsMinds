@@ -1,5 +1,3 @@
-require 'methods_daly_news/daly_news.rb'
-
 class TopStoriesController < ApplicationController
 
   def discussion
@@ -12,6 +10,7 @@ class TopStoriesController < ApplicationController
     end
   end
   
+
   def selectPrevDays
     
     @top_stories = TopStory.where( :id => params[:id] ).first

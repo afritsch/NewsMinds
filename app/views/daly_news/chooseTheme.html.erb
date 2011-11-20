@@ -2,9 +2,10 @@
 <h2>Themen wählen</h2>
 
 	<% @daly_news.each do |news| %>
-	<a href="votedTheme/<%= news.id %>" >
-	<h3><%= news.title %></h3><div><%= raw news.description %></div>
-	</a>
+	  <a href="votedTheme/<%= news.id %>" >
+	  <h3><%= news.title %></h3><div><%= raw news.description %></div>
+	  </a>
+	  <p>Stimmen zurzeit: <%= news.clicks %></p>
 	<% end %>
 
 </div>

@@ -1,5 +1,3 @@
-require 'methods_daly_news/daly_news.rb'
-
 class HomeController < ApplicationController
 
   def index
