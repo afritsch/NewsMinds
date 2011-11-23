@@ -1,18 +1,19 @@
 class UserController < ApplicationController
-
+ 
+  # increases or decreases post score that is related to a user mind
+  # note that this affects another user's mind
   def changeMind
     if session[:username] != nil
-      @user = User.where( :username => session[:username] ).first
+
+      @post = Post.where( :id => params[:post_id] ).first
 
       if params[:post_estimation] == params[:answer]
-        @user.mind += 1
-        @user.numberOfPosPosts += 1
+	@post.post_score += 1
       else
-        @user.mind -= 1
-        @user.numberOfNegPosts += 1
+	@post.post_score -= 1
       end
- 
-      @user.save
+
+      @post.save
 
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
     else
@@ -77,7 +78,7 @@ class UserController < ApplicationController
 
         @user.numberOfNegPosts = 0 
         
-        @user.mind = 50
+        @user.mind = 0
  
         @valid = @user.save
         

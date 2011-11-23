@@ -13,14 +13,14 @@
 <table>	
 <% @latest_top_story.posts.each do |post| %>
 
-<tr><td><b>Kommentar vom User: <%= post.user.username %></b></td></tr> 
+<tr><td><b>Kommentar vom User: <%= post.user.username %></b></td><td><b>Postscore: </b><%= post.post_score %></td></tr> 
 <tr><td><%= post.title %></td></tr>
 <tr><td><%= post.content %></td></tr>
 
 <% if post.user.username != session[:username] %>
 
-  <tr><td><%= link_to 'find ich gut', user_mind_path(1, post.estimation) %></td></tr>
-  <tr><td><%= link_to 'find ich schlecht', user_mind_path(0, post.estimation) %></td></tr>
+  <tr><td><%= link_to 'find ich gut', user_mind_path(1, post.estimation, post.id) %></td></tr>
+  <tr><td><%= link_to 'find ich schlecht', user_mind_path(0, post.estimation, post.id) %></td></tr>
 
 <% end %>
 

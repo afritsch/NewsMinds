@@ -10,10 +10,13 @@
   <p><b>Kommentartitel:</b></p>
   <p><%= post.title %></p>
 
-  <p><b>Inhalt</b></p>
+  <p><b>Inhalt:</b></p>
   <p><%= post.content %></p>
 
-  <p><b>Bewertung</b></p>
+  <p><b>Score:</b></p>
+  <p><%= post.post_score %></p>
+
+  <p><b>Bewertung:</b></p>
   <p><%= post.estimation %></p>
 
   <p><%= link_to 'Kommentar ändern', edit_post_path(post.id) %>

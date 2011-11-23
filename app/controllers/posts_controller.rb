@@ -40,6 +40,7 @@ class PostsController < ApplicationController
 
     @post.top_story_id = params[:top_story_id]
     @post.user_id = params[:user_id]
+    @post.post_score = 0
 
     if params[:estimation] == "positiv" 
       @post.estimation = 1 

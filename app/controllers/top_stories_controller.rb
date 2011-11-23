@@ -4,6 +4,23 @@ class TopStoriesController < ApplicationController
     
     @latest_top_story = TopStory.last
 
+    # post score is going to be put into users mind score 
+    # that has got that post
+    
+    if session[:username] != nil 
+      @user = User.where( :username => session[:username] ).first
+      
+      @sum = 0
+      @user.posts.each do |post|
+        @sum += post.post_score
+      end
+      
+      if @sum != @user.mind 
+        @user.mind = @sum
+	@user.save
+      end
+    end
+      
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @latest_top_story }

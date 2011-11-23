@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
     if handler.isNewMonth 
       handler.eraseOldTopStoryEntries
-      handler.eraseOldPost
+      handler.eraseOldPosts
     end
 
     respond_to do |format|
