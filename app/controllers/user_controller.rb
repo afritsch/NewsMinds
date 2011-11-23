@@ -16,7 +16,7 @@ class UserController < ApplicationController
 
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
     else
-      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu können")
+      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu koennen")
     end
   end
 

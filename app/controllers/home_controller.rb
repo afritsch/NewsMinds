@@ -5,7 +5,8 @@ class HomeController < ApplicationController
     handler = DalyNewsHandler.new
 
     if handler.isNewMonth 
-      handler.ereaseOldTopStoryEntries
+      handler.eraseOldTopStoryEntries
+      handler.eraseOldPost
     end
 
     respond_to do |format|

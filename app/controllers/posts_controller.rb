@@ -71,7 +71,7 @@ class PostsController < ApplicationController
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  
-    redirect_to(posts_path, :notice => "Kommentar erfolgreich geändert")
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich geaendert")
   end 
   
 

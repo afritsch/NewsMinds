@@ -63,7 +63,7 @@ class DalyNewsHandler
  
 
   def isNewMonth
-    if ((Time.now.to_s.slice(4..6) <=> TopStory.first.pubDate.slice(4..6)) != 0)
+    if ((Time.now.to_s.slice(5..6) <=> TopStory.first.pubDate.slice(5..6)) != 0)
       return true
     else
       return false
@@ -72,12 +72,17 @@ class DalyNewsHandler
   
   
   # ereases all entries except of the youngest
-  def ereaseOldTopStoryEntries
+  def eraseOldTopStoryEntries
     for i in 0...TopStory.count-1
       TopStory.first.destroy
     end
   end
- 
+
+
+  def eraseOldPosts
+    Post.destroy_all
+  end
+
 
   # checks if a top story is chosen today 
   def hasGotTopStory
