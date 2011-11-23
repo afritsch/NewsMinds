@@ -49,11 +49,12 @@ class PostsController < ApplicationController
       @post.estimation = 0
     end
 
-    @post.save
-
-    respond_to do |format|
-      format.html { redirect_to(top_stories_path, :notice => "Post erfolgreich erstellt") }
-      format.xml { render :xml => @post }
+    @valid = @post.save
+    
+    if @valid
+      redirect_to(top_stories_path, :notice => "Post erfolgreich erstellt")
+    else
+      redirect_to(top_stories_path, :notice => "Post nicht vollstaendig ausgefuellt")
     end
 
   end
