@@ -6,11 +6,13 @@ class UserController < ApplicationController
     if session[:username] != nil
 
       @post = Post.where( :id => params[:post_id] ).first
+      
+      @post.voted_usernames += session[:username] + " "
 
       if params[:post_estimation] == params[:answer]
-	@post.post_score += 1
+	@post.score += 1
       else
-	@post.post_score -= 1
+	@post.score -= 1
       end
 
       @post.save

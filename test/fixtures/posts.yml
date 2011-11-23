@@ -6,7 +6,8 @@ one:
   title: MyString
   content: MyText
   estimation: 1
-  post_score: 1
+  score: 1
+  voted_usernames: MyString
 
 two:
   user_id: 1
@@ -14,4 +15,5 @@ two:
   title: MyString
   content: MyText
   estimation: 1
-  post_score: 1
+  score: 1
+  voted_usernames: MyString

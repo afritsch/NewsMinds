@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123131547) do
+ActiveRecord::Schema.define(:version => 20111123192542) do
 
   create_table "daly_news", :force => true do |t|
     t.string   "title"
@@ -27,7 +27,8 @@ ActiveRecord::Schema.define(:version => 20111123131547) do
     t.string   "title"
     t.text     "content"
     t.integer  "estimation"
-    t.integer  "post_score"
+    t.integer  "score"
+    t.string   "voted_usernames"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

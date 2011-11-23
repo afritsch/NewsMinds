@@ -12,7 +12,7 @@ class TopStoriesController < ApplicationController
       
       @sum = 0
       @user.posts.each do |post|
-        @sum += post.post_score
+        @sum += post.score
       end
       
       if @sum != @user.mind 
