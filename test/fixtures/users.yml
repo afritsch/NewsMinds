@@ -3,13 +3,17 @@
 one:
   username: MyString
   password: MyString
-  numberOfPosPosts: 1
-  numberOfNegPosts: 1
+  numberOfPosVotedPosts: 1
+  numberOfNegVotedPosts: 1
+  numberOfPosCreatedPosts: 1
+  numberOfNegCreatedPosts: 1
   mind: 1
 
 two:
   username: MyString
   password: MyString
-  numberOfPosPosts: 1
-  numberOfNegPosts: 1
+  numberOfPosVotedPosts: 1
+  numberOfNegVotedPosts: 1
+  numberOfPosCreatedPosts: 1
+  numberOfNegCreatedPosts: 1
   mind: 1

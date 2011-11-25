@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123192542) do
+ActiveRecord::Schema.define(:version => 20111124163313) do
 
   create_table "daly_news", :force => true do |t|
     t.string   "title"
@@ -45,8 +45,10 @@ ActiveRecord::Schema.define(:version => 20111123192542) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password"
-    t.integer  "numberOfPosPosts"
-    t.integer  "numberOfNegPosts"
+    t.integer  "numberOfPosVotedPosts"
+    t.integer  "numberOfNegVotedPosts"
+    t.integer  "numberOfPosCreatedPosts"
+    t.integer  "numberOfNegCreatedPosts"
     t.integer  "mind"
     t.datetime "created_at"
     t.datetime "updated_at"

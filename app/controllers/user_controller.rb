@@ -1,9 +1,25 @@
 class UserController < ApplicationController
- 
+
+  def changeNumberOfVotedPosts(answer)
+    @user = User.where( :username => session[:username] ).first
+    
+    if answer.to_i == 1 
+      @user.numberOfPosVotedPosts += 1
+    else
+      @user.numberOfNegVotedPosts += 1
+    end
+    
+    @user.save
+
+  end
+
+
   # increases or decreases post score that is related to a user mind
   # note that this affects another user's mind
   def changeMind
     if session[:username] != nil
+      
+      changeNumberOfVotedPosts( params[:post_estimation] )
 
       @post = Post.where( :id => params[:post_id] ).first
       
@@ -11,16 +27,20 @@ class UserController < ApplicationController
 
       if params[:post_estimation] == params[:answer]
 	@post.score += 1
+	@post.user.mind += 1 if @post.user.mind < 50
       else
 	@post.score -= 1
+	@post.user.mind -= 1 if @post.user.mind > -50
       end
-
+      
+      @post.user.save
       @post.save
-
+      
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
     else
       redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu koennen")
     end
+
   end
 
 
@@ -76,9 +96,13 @@ class UserController < ApplicationController
 
       if @doesNotExist.empty? 
 
-        @user.numberOfPosPosts = 0 
+        @user.numberOfPosCreatedPosts = 0 
 
-        @user.numberOfNegPosts = 0 
+        @user.numberOfNegCreatedPosts = 0 
+        
+        @user.numberOfPosVotedPosts = 0 
+
+        @user.numberOfNegVotedPosts = 0 
         
         @user.mind = 0
  

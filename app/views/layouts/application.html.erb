@@ -76,7 +76,7 @@ NewsMinds
   <li><%= link_to 'Posts', posts_path %></li>
 <% end %>
 
-<li><a href="#">Leer</a></li>
+<li><%= link_to 'Archiv', archive_path %></li>
 </ul>
 </div>
 
@@ -95,12 +95,25 @@ NewsMinds
 </div>
 <div id="rightbar">
 
-<%= content_for :user_data %>
+<% if isUserLoggedIn  %>
+  
+  <% user = User.where( :username => session[:username] ).first %>
 
-<div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
-<h3>H3</h3>
-<div>Lorem ipsum dolor sit amet, sanctae Stranguillionis in rei sensibilium acciperem qui. Ex hic in fuerat construeret in rei civibus.</div>
-</div>
+    <b>User: <%= session[:username] %></b>
+    <p>Gesinnungsparamter</p> 
+    <img src="https://chart.googleapis.com/chart?chs=175x110&amp;cht=gom&amp;chd=t:<%= user.mind + 50 %>&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|<%= user.mind + 50 %>|1:|Schlecht            |  |    |            Gut" />
+
+    <p>Anzahl der positiv bewerteten Kommentare: <%= user.numberOfPosVotedPosts %></p>
+    <p>Anzahl der negativ bewerteten Kommentare: <%= user.numberOfNegVotedPosts %></p>
+
+    <p>Anzahl der positiv erstellten Kommentare: <%= user.numberOfPosCreatedPosts %></p>
+    <p>Anzahl der negativ erstellten Kommentare: <%= user.numberOfNegCreatedPosts %></p>
+
+
+<% else %>
+
+  <b>Hier werden ide Userspezifischen Daten aufgelistet</b>
+<% end %>
 
 </div>
 

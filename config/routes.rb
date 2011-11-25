@@ -27,7 +27,7 @@ Qpt2a::Application.routes.draw do
   resources :top_stories
     match 'themeOfDay' => "TopStories#discussion", :as => "top_stories"  
     match 'prevDays/:id' => "TopStories#selectPrevDays", :as => "prev_days"     
- 
+    match 'archive' => "TopStories#archive", :as => "archive" 
   
   get "posts/index"
   get "posts/new"

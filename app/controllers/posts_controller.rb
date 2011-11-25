@@ -43,15 +43,22 @@ class PostsController < ApplicationController
     @post.score = 0
     @post.voted_usernames = ""
 
+
     if params[:estimation] == "positiv" 
-      @post.estimation = 1 
+      @post.estimation = 1
+
+      @post.user.numberOfPosCreatedPosts += 1
     else
       @post.estimation = 0
+
+      @post.user.numberOfNegCreatedPosts += 1
     end
 
     @valid = @post.save
     
     if @valid
+      @post.user.save
+
       redirect_to(top_stories_path, :notice => "Post erfolgreich erstellt")
     else
       redirect_to(top_stories_path, :notice => "Post nicht vollstaendig ausgefuellt")

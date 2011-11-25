@@ -20,5 +20,5 @@ module TopStoriesHelper
       return true
     end
   end
-
+  
 end
