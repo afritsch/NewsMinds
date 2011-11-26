@@ -55,7 +55,7 @@ class UserController < ApplicationController
   end
 
 
-  def checkUser
+  def login 
    
     @user = User.where( :username => params[:username].upcase, :password => params[:password] )
 

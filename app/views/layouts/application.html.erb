@@ -37,7 +37,7 @@
 
 <% if session[:username] == nil %>
 
-<form action="<%= check_user_path %>" method="POST">
+<form action="<%= login_path %>" method="POST">
 <table>
 <tr><td><%= link_to 'Registrieren', register_path %></td></tr>
 <tr><td><input type="submit" value=" Login " /></td></tr>
@@ -101,7 +101,7 @@ NewsMinds
 
     <b>User: <%= session[:username] %></b>
     <p>Gesinnungsparamter</p> 
-    <img src="https://chart.googleapis.com/chart?chs=175x110&amp;cht=gom&amp;chd=t:<%= user.mind + 50 %>&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|<%= user.mind + 50 %>|1:|Schlecht            |  |    |            Gut" />
+    <img src="https://chart.googleapis.com/chart?chs=175x110&amp;cht=gom&amp;chd=t:<%= user.mind + 50 %>&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|<%= user.mind %>|1:|Schlecht            |  |    |            Gut" />
 
     <p>Anzahl der positiv bewerteten Kommentare: <%= user.numberOfPosVotedPosts %></p>
     <p>Anzahl der negativ bewerteten Kommentare: <%= user.numberOfNegVotedPosts %></p>

@@ -8,7 +8,7 @@ Qpt2a::Application.routes.draw do
   resources :user
     match 'User/logout' => "User#logout", :as => "logout"
     match 'User/register' => "User#registration", :as => "register"
-    match 'User/checkUser' => "User#checkUser", :as => "check_user"
+    match 'User/login' => "User#login", :as => "login"
     match 'User/create' => "User#create", :as => "create"
     match 'User/changeMind/:answer/:post_estimation/:post_id' => "User#changeMind", :as => "user_mind"  
 
