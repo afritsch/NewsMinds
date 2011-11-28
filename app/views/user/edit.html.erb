@@ -1,0 +1,6 @@
+﻿<% form_for(@user) do |u| %>
+  <%= u.label :password %>
+  <%= u.text_field :password %>
+
+  <%= u.submit 'Ändern' %>
+<% end %>

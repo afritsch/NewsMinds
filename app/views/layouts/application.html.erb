@@ -71,11 +71,13 @@ NewsMinds
 	<li><%= link_to 'Themenwahl', choose_theme_path %></li>
 <% end %>
 
-<% if session[:username] != nil %>
+<li><%= link_to 'Archiv', archive_path %></li>
+
+<% if isUserLoggedIn %>
   <li><%= link_to 'Posts', posts_path %></li>
+  <li><%= link_to 'Profil', profile_path %></li>
 <% end %>
 
-<li><%= link_to 'Archiv', archive_path %></li>
 </ul>
 </div>
 

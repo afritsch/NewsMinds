@@ -1,7 +1,12 @@
 class UserController < ApplicationController
+  before_filter :getUser, :only => [:changeMind, :edit]
+
+  def getUser
+    @user = User.where( :username => session[:username] ).first
+  end
+
 
   def changeNumberOfVotedPosts(answer)
-    @user = User.where( :username => session[:username] ).first
     
     if answer.to_i == 1 
       @user.numberOfPosVotedPosts += 1
@@ -110,11 +115,24 @@ class UserController < ApplicationController
 	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gueltig, Username muss mindestens 4 aber maximal 12 Zeichen beinhalten und Passwort muss mindestens 6 aber maximal 15 Zeichen beinhalten.") }
           format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
+
       else
-        format.html  { redirect_to(root_path, :notice => "Username schon vorhanden") }
-        format.json  { render :json => @user.errors, :status => :unprocessable_entity }
+        redirect_to(root_path, :notice => "Username schon vorhanden") 
       end
     end
+
+  end
+
+  def edit
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @user }
+    end
+  end
+
+  def update
+    User.where( :username => session[:username] ).first.update_attributes( params[:user] )
+    redirect_to(profile_path, :notice => "Userdaten erfolgreich geaendert")
   end
 
 end
