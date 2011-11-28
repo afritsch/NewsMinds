@@ -97,15 +97,10 @@ class UserController < ApplicationController
       if @doesNotExist.empty? 
 
         @user.numberOfPosCreatedPosts = 0 
-
         @user.numberOfNegCreatedPosts = 0 
-        
         @user.numberOfPosVotedPosts = 0 
-
         @user.numberOfNegVotedPosts = 0 
-        
         @user.mind = 0
- 
         @valid = @user.save
         
 	if @valid

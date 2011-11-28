@@ -86,11 +86,7 @@ class DalyNewsHandler
 
   # checks if a top story is chosen today 
   def hasGotTopStory
-    if ((Time.now.to_s.slice(8..9) <=> TopStory.last.pubDate.slice(8..9)) == 0)
-      return true
-    else
-      return false
-    end 
+     Time.now.to_s.slice(8..9).eql? TopStory.last.pubDate.slice(8..9)
   end
 
 end

@@ -65,8 +65,7 @@ NewsMinds
 <ul>
 <li><%= link_to 'Home', root_path %></li>
 
-<% handler = DalyNewsHandler.new %>
-<% if handler.hasGotTopStory %>
+<% if hasGotTopStory? %>
 	<li><%= link_to 'Tagesthema', top_stories_path %></li>
 <% else %>
 	<li><%= link_to 'Themenwahl', choose_theme_path %></li>
@@ -100,9 +99,8 @@ NewsMinds
   <% user = User.where( :username => session[:username] ).first %>
 
     <b>User: <%= session[:username] %></b>
-    <p>Gesinnungsparamter</p> 
-    <img src="https://chart.googleapis.com/chart?chs=175x110&amp;cht=gom&amp;chd=t:<%= user.mind + 50 %>&amp;chco=FF0000,FF8040,FFFF00,00FF00,00FFFF&amp;chxt=x,y&amp;chxl=0:|<%= user.mind %>|1:|Schlecht            |  |    |            Gut" />
-
+    <p>Gesinnungsparamter</p>
+    <img src="http://chart.apis.google.com/chart?chf=bg,s,D9D9C1&chxl=0:|Schlecht        ||          Gut&chxp=0,0,,100&chxt=y&chs=175x110&cht=gm&chco=76A4FB95&chd=t:<%= user.mind + 50 %>&chl=<%= user.mind %>" width="175" height="110" alt="" />    
     <p>Anzahl der positiv bewerteten Kommentare: <%= user.numberOfPosVotedPosts %></p>
     <p>Anzahl der negativ bewerteten Kommentare: <%= user.numberOfNegVotedPosts %></p>
 

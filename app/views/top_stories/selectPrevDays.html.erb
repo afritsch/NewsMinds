@@ -10,9 +10,9 @@
 <table>	
 <% @top_stories.posts.each do |post| %>
 
-  <tr><td><b><%= post.title %></b></td></tr>
-  <tr><td><p><%= post.content %></p</td></tr>
-  <tr><td><p><%= post.estimation %></p</td></tr>
+  <tr><td>Titel: </td><td><b><%= post.title %></b></td></tr>
+  <tr><td>Beschreibung: </td><td><p><%= post.content %></p</td></tr>
+  <tr><td>Score: </td><td><p><%= post.score %></p</td></tr>
   <tr><td></td</tr>
 
 <% end %>
