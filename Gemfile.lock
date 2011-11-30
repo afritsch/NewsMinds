@@ -96,5 +96,4 @@ DEPENDENCIES
   capistrano
   mysql2
   rails (= 3.0.9)
-  sqlite3
   sqlite3-ruby
