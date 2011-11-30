@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+﻿class UserController < ApplicationController
   before_filter :getUser, :only => [:changeMind, :edit]
 
   def getUser
@@ -43,7 +43,7 @@ class UserController < ApplicationController
       
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
     else
-      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu koennen")
+      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu können")
     end
 
   end
@@ -53,7 +53,7 @@ class UserController < ApplicationController
     session.delete(:username)
     
     respond_to do |format|
-      format.html { redirect_to(root_path, :notice => "Ausgeloggt") }
+      format.html { redirect_to(root_path, :notice => "Erfolgreich Ausgeloggt") }
       format.xml  { render :xml => {}, status => :ok }
     end
 
@@ -69,7 +69,7 @@ class UserController < ApplicationController
       if !@user.empty?
         session[:username] = params[:username].upcase 
 
-        format.html { redirect_to(root_path, :notice => "Du bist eingeloggt") }
+        format.html { redirect_to(root_path, :notice => "Erfolgreich eingeloggt") }
         format.xml  { render :xml => {}, status => :ok }
       else
         format.html { redirect_to(root_path, :notice => "Falsche Eingabe") }
@@ -109,15 +109,15 @@ class UserController < ApplicationController
         @valid = @user.save
         
 	if @valid
-          format.html  { redirect_to(root_path, :notice => "User erfolgreich erzeugt") }
+          format.html  { redirect_to(root_path, :notice => "Erfolgreich registriert") }
           format.json  { render :json => @user, :status => :created, :location => root_path }
         else
-	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gueltig, Username muss mindestens 4 aber maximal 12 Zeichen beinhalten und Passwort muss mindestens 6 aber maximal 15 Zeichen beinhalten.") }
+	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss zwischen 4 und 12 Zeichen lang sein und Passwort muss zwischen 6 und 15 Zeichen lang sein.") }
           format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
 
       else
-        redirect_to(root_path, :notice => "Username schon vorhanden") 
+        redirect_to(root_path, :notice => "Username schon belegt") 
       end
     end
 
@@ -132,7 +132,7 @@ class UserController < ApplicationController
 
   def update
     User.where( :username => session[:username] ).first.update_attributes( params[:user] )
-    redirect_to(profile_path, :notice => "Userdaten erfolgreich geaendert")
+    redirect_to(profile_path, :notice => "Userdaten erfolgreich geändert")
   end
 
 end

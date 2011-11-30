@@ -1,4 +1,4 @@
-class DalyNewsController < ApplicationController
+﻿class DalyNewsController < ApplicationController
     
   def chooseTheme
     
@@ -45,7 +45,7 @@ class DalyNewsController < ApplicationController
         end
 
       else
-        redirect_to(root_path, :notice => "Du musst Miglied werden, um abstimmen zu koennen")
+        redirect_to(root_path, :notice => "Du musst dich registrieren, um abstimmen zu können")
 
       end
 

@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+﻿class PostsController < ApplicationController
   before_filter :get_post, :only => [:edit, :update]
 
   def get_post
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
         format.xml { render :xml => @post }
       end 
     else
-      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um einen Kommentar erstellen zu koennen")
+      redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um einen Kommentar erstellen zu können")
     end
   end
  
@@ -59,9 +59,9 @@ class PostsController < ApplicationController
     if @valid
       @post.user.save
 
-      redirect_to(top_stories_path, :notice => "Post erfolgreich erstellt")
+      redirect_to(top_stories_path, :notice => "Kommentar erfolgreich erstellt")
     else
-      redirect_to(top_stories_path, :notice => "Post nicht vollstaendig ausgefuellt")
+      redirect_to(top_stories_path, :notice => "Kommentar nicht vollständig ausgefüllt")
     end
 
   end
@@ -81,21 +81,21 @@ class PostsController < ApplicationController
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  
-    redirect_to(posts_path, :notice => "Kommentar erfolgreich geaendert")
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich geändert")
   end 
   
 
   def destroy
     User.where( :username => session[:username] ).first.posts.find( params[:id] ).destroy
     
-    redirect_to(posts_path, :notice => "Kommentar erfolgreich geloescht")
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich gelöscht")
   end
 
  
   def destroy_all
     User.where( :username => session[:username] ).first.posts.destroy_all
    
-    redirect_to(posts_path, :notice => "Alle Kommentare erfolgreich geloescht")
+    redirect_to(posts_path, :notice => "Alle Kommentare erfolgreich gelöscht")
   end
 
 end

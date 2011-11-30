@@ -1,4 +1,4 @@
-require 'daly_news.rb'
+﻿require 'daly_news.rb'
 
 class HomeController < ApplicationController
 

@@ -1,4 +1,4 @@
-class TopStoriesController < ApplicationController
+﻿class TopStoriesController < ApplicationController
 
   def discussion
     
