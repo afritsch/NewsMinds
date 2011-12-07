@@ -5,9 +5,9 @@
     handler = NewsHandler.new
  
     #load new themes if nesseccary 
-    handler.checkDailyNewsList
+    handler.checkDalyNewsList
  
-    @daly_news = DalyNews.all
+    @daly_news = DalyNews.onlyThemes
 
     respond_to do |format|
       format.html # index.html.erb

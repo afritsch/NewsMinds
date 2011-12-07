@@ -9,17 +9,6 @@ class NewsHandler
   end
 
 
-  def isUpToDate?
-    # first item of rss is up to date so first instead of last 
-    DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
-  end
- 
-
-  def getUpdated 
-    @raw_data = RSS::Parser.parse('http://www.nachrichten.at/storage/rss/rss/weltspiegel.xml', false)
-  end
-  
-  
   def copyToDatabase
     DalyNews.destroy_all
 
@@ -34,13 +23,14 @@ class NewsHandler
   end
   
 
-  def checkDailyNewsList
+  def checkDalyNewsList
     if !isUpToDate?      
       copyToDatabase 
     end
   end  
   
-
+  
+  # the deadline of a topstory is 12 o clock the day after it was elected 
   def hasTopStoryDeadlineEnded?
     TopStory.last.pubDate.slice(11..12).to_i > 11 
   end
@@ -95,6 +85,16 @@ class NewsHandler
     DalyNews.where( :clicks => number ).first
   end
 
+  def isUpToDate?
+    # first item of rss is up to date so first instead of last 
+    DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
+  end
+ 
+
+  def getUpdated 
+    @raw_data = RSS::Parser.parse('http://www.nachrichten.at/storage/rss/rss/weltspiegel.xml', false)
+  end
+  
 end
 
 
