@@ -3,6 +3,6 @@ class Post < ActiveRecord::Base
   validates :content, :presence => true
   validates :estimation, :presence => true
 
-  belongs_to :user
-  belongs_to :top_story
+  belongs_to :user, :dependent => :destroy
+  belongs_to :top_story, :dependent => :destroy
 end
