@@ -2,6 +2,12 @@
 
   def discussion
     
+    handler = NewsHandler.new
+
+    if !handler.isTopStoryUpToDate? && !handler.hasTopStoryDeadlineEnded?
+      handler.insertThemeIntoTopStoryDatabase
+    end
+
     @latest_top_story = TopStory.last
 
     respond_to do |format|

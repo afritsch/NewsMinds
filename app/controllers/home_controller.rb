@@ -4,7 +4,7 @@
 
     handler = NewsHandler.new
 
-    if handler.isNewMonth 
+    if handler.isNewMonth? 
       handler.eraseOldTopStoryEntries
       handler.eraseOldPosts
     end

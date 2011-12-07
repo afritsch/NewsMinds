@@ -4,8 +4,8 @@
     
     handler = NewsHandler.new
  
-    #load DalyNews if nesseccary 
-    handler.checkDalyNewsList
+    #load new themes if nesseccary 
+    handler.checkDailyNewsList
  
     @daly_news = DalyNews.all
 
@@ -28,16 +28,12 @@
      
       if session[:username] != nil
  
-        cookies[:voted] = { :value => "voted", :expires => 24.hours.from_now } 
+        cookies[:voted] = { :value => "voted", :expires => 20.hours.from_now } 
 
         @voted_news = DalyNews.where( :id => params[:id] )
         @voted_news[0].clicks += 1
         @voted_news[0].save
      
-        handler = DalyNewsHandler.new
-
-        # if new news is selected to be top story, insert it into top_news database    
-        handler.checkAndInsertNewsIntoTopStoryDatabase
 
         respond_to do |format|
           format.html

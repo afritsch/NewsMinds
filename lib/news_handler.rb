@@ -9,7 +9,7 @@ class NewsHandler
   end
 
 
-  def isUpToDate
+  def isUpToDate?
     # first item of rss is up to date so first instead of last 
     DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
   end
@@ -34,35 +34,38 @@ class NewsHandler
   end
   
 
-  def checkDalyNewsList
-    if !isUpToDate      
+  def checkDailyNewsList
+    if !isUpToDate?      
       copyToDatabase 
     end
   end  
   
+
+  def hasTopStoryDeadlineEnded?
+    TopStory.last.pubDate.slice(11..12).to_i > 11 
+  end
+
+
+  # is there still a new TopStory theme
+  def isTopStoryUpToDate?
+    TopStory.last.pubDate.slice(8..9).eql? Time.now.to_s.slice(8..9)
+  end
   
-  def checkAndInsertNewsIntoTopStoryDatabase 
-    DalyNews.all.each do |news|
-      if news.clicks >= 5 && ((TopStory.last.pubDate.slice(8..9) <=> Time.now.to_s.slice(8..9)) != 0) 
-        story = TopStory.new
-        story.title = news.title
-        story.description = news.description
-        story.pubDate = Time.now.to_s
-        story.chosen = news.clicks
-        story.save
-        
-        break 
-      end  
-    end
+ 
+  def insertThemeIntoTopStoryDatabase 
+    news = findMostClickedTheme
+
+    story = TopStory.new
+    story.title = news.title
+    story.description = news.description
+    story.pubDate = Time.now.to_s
+    story.chosen = news.clicks
+    story.save
   end
  
 
-  def isNewMonth
-    if Time.now.to_s.slice(5..6).eql? TopStory.first.pubDate.slice(5..6)
-      return true
-    else
-      return false
-    end
+  def isNewMonth?
+    !(TopStory.first.pubDate.slice(5..6).eql? Time.now.to_s.slice(5..6)) 
   end
   
   
@@ -79,9 +82,17 @@ class NewsHandler
   end
 
 
-  # checks if a top story is chosen today 
-  def hasGotTopStory
-     Time.now.to_s.slice(8..9).eql? TopStory.last.pubDate.slice(8..9)
+  private
+
+  def findMostClickedTheme
+    number = 0
+    DalyNews.all.each do |news|
+      if news.clicks > number
+        number = news.clicks
+      end
+    end
+
+    DalyNews.where( :clicks => number ).first
   end
 
 end

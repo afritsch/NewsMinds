@@ -63,7 +63,7 @@
   def login 
    
     @user = User.where( :username => params[:username].upcase, :password => params[:password] )
-
+    
     respond_to do |format|
 
       if !@user.empty?

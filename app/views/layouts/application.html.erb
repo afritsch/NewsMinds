@@ -65,11 +65,8 @@ NewsMinds
 <ul>
 <li><%= link_to 'Home', root_path %></li>
 
-<% if hasGotTopStory? %>
-	<li><%= link_to 'Tagesthema', top_stories_path %></li>
-<% else %>
-	<li><%= link_to 'Themenwahl', choose_theme_path %></li>
-<% end %>
+<li><%= link_to 'Tagesthema', top_stories_path %></li>
+<li><%= link_to 'Themenwahl', choose_theme_path %></li>
 
 <li><%= link_to 'Archiv', archive_path %></li>
 
