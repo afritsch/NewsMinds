@@ -2,7 +2,7 @@
     
   def chooseTheme
     
-    handler = DalyNewsHandler.new
+    handler = NewsHandler.new
  
     #load DalyNews if nesseccary 
     handler.checkDalyNewsList

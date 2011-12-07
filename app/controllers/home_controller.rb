@@ -1,10 +1,8 @@
-﻿require 'daly_news.rb'
-
-class HomeController < ApplicationController
+﻿class HomeController < ApplicationController
 
   def index
 
-    handler = DalyNewsHandler.new
+    handler = NewsHandler.new
 
     if handler.isNewMonth 
       handler.eraseOldTopStoryEntries

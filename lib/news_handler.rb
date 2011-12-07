@@ -2,7 +2,7 @@ require 'rss/1.0'
 require 'rss/2.0'
 
 
-class DalyNewsHandler
+class NewsHandler
   
   def initialize 
     getUpdated  
@@ -10,13 +10,8 @@ class DalyNewsHandler
 
 
   def isUpToDate
-   
     # first item of rss is up to date so first instead of last 
-    if ((DalyNews.first.date.slice(5..6) <=> Time.now.to_s.slice(8..9)) == 0)
-      return true
-    else
-      return false
-    end
+    DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
   end
  
 
@@ -63,7 +58,7 @@ class DalyNewsHandler
  
 
   def isNewMonth
-    if ((Time.now.to_s.slice(5..6) <=> TopStory.first.pubDate.slice(5..6)) != 0)
+    if Time.now.to_s.slice(5..6).eql? TopStory.first.pubDate.slice(5..6)
       return true
     else
       return false

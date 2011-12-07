@@ -11,6 +11,9 @@ class CreatePosts < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :posts, :top_story_id
+    add_index :posts, :user_id
   end
 
   def self.down
