@@ -1,0 +1,34 @@
+﻿
+<% if @posts.empty? %>
+<h2 style="margin-left:30%">Noch keine Kommentare vorhanden</h2>
+
+<% else %>
+  <% @posts.each do |post| %>
+
+  <p><b>Tagesthematitel:</b></p>
+  <p><%= post.top_story.title %></p>
+  <p><b>Kommentartitel:</b></p>
+  <p><%= post.title %></p>
+
+  <p><b>Inhalt:</b></p>
+  <p><%= post.content %></p>
+
+  <p><b>Score:</b></p>
+  <p><%= post.score %></p>
+
+  <p><b>Bewertung:</b></p>
+  <p><% if post.estimation == 1 %>
+       Positiv
+     <% else %>
+       Negativ
+     <% end %>
+  </p>
+
+  <p><%= link_to 'Kommentar ändern', edit_post_path(post.id) %>
+  <p><%= link_to 'Kommentar löschen', destroy_path(post.id) %>
+  <% end %>
+
+<p><%= link_to 'Alle Kommentare löschen', destroy_all_path %></p>
+
+<% end %>
+
