@@ -4,3 +4,4 @@ log/*.log
 tmp/
 *.bak
 deploy.rb
+config/initializers/secret_token.rb
