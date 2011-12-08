@@ -2,11 +2,6 @@
     
   def chooseTheme
     
-    handler = NewsHandler.new
- 
-    #load new themes if nesseccary 
-    handler.checkDalyNewsList
- 
     @daly_news = DalyNews.onlyThemes
 
     respond_to do |format|
@@ -33,7 +28,6 @@
         @voted_news = DalyNews.where( :id => params[:id] )
         @voted_news[0].clicks += 1
         @voted_news[0].save
-     
 
         respond_to do |format|
           format.html

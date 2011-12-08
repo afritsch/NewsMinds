@@ -37,7 +37,7 @@ Qpt2a::Application.routes.draw do
   resources :posts
     match "posts/:top_story_id/new" => "Posts#new", :as => "new_post"
     match "posts/:id/edit" => "Posts#edit", :as => "edit_post"
-    match "posts" => "Posts#index", :as => "posts"
+    match "myposts" => "Posts#userPosts", :as => "myposts"
     match "posts/destroy/all" => "Posts#destroy_all", :as => "destroy_all" 
     match "posts/destroy/:id" => "Posts#destroy", :as => "destroy"
 

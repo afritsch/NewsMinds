@@ -4,8 +4,12 @@
     
     handler = NewsHandler.new
 
+    # after twelve o clock a new theme is turned into a top story 
+    # and new themes are loaded in
+
     if !handler.isTopStoryUpToDate? && !handler.hasTopStoryDeadlineEnded?
       handler.insertThemeIntoTopStoryDatabase
+      handler.checkThemeList
     end
 
     @latest_top_story = TopStory.last

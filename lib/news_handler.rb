@@ -5,11 +5,11 @@ require 'rss/2.0'
 class NewsHandler
   
   def initialize 
-    getUpdated  
+    loadRSSFeeds
   end
 
 
-  def copyToDatabase
+  def copyRSSIntoDatabase
     DalyNews.destroy_all
 
     for i in 0...@raw_data.items.count do
@@ -23,9 +23,9 @@ class NewsHandler
   end
   
 
-  def checkDalyNewsList
-    if !isUpToDate?      
-      copyToDatabase 
+  def checkThemeList
+    if !isDataUpToDate?      
+      copyRSSIntoDatabase 
     end
   end  
   
@@ -85,13 +85,15 @@ class NewsHandler
     DalyNews.where( :clicks => number ).first
   end
 
-  def isUpToDate?
-    # first item of rss is up to date so first instead of last 
+
+  # if the first feed is up to date data must not be loaded in again 
+  def isDataUpToDate?
     DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
   end
  
-
-  def getUpdated 
+  
+  # all themes are loaded in from nachrichten.at by RSS Feeds
+  def loadRSSFeeds 
     @raw_data = RSS::Parser.parse('http://www.nachrichten.at/storage/rss/rss/weltspiegel.xml', false)
   end
   

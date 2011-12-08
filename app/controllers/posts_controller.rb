@@ -6,7 +6,7 @@
   end
 
 
-  def index
+  def userPosts 
     @posts = User.where( :username => session[:username] ).first.posts
  
     respond_to do |format|
@@ -81,21 +81,21 @@
   def update
     Post.find( params[:id] ).update_attributes( params[:post] )
  
-    redirect_to(posts_path, :notice => "Kommentar erfolgreich geändert")
+    redirect_to(myposts_path, :notice => "Kommentar erfolgreich geändert")
   end 
   
 
   def destroy
     User.where( :username => session[:username] ).first.posts.find( params[:id] ).destroy
     
-    redirect_to(posts_path, :notice => "Kommentar erfolgreich gelöscht")
+    redirect_to(myposts_path, :notice => "Kommentar erfolgreich gelöscht")
   end
 
  
   def destroy_all
     User.where( :username => session[:username] ).first.posts.destroy_all
    
-    redirect_to(posts_path, :notice => "Alle Kommentare erfolgreich gelöscht")
+    redirect_to(myposts_path, :notice => "Alle Kommentare erfolgreich gelöscht")
   end
 
 end
