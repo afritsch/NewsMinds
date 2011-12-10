@@ -97,9 +97,10 @@ NewsMinds
   
   <% user = User.where( :username => session[:username] ).first %>
 
-    <b>User: <%= session[:username] %></b>
+    <b>User: <%= user.username %></b>
     <p>Gesinnungsparamter</p>
     <img src="http://chart.apis.google.com/chart?chf=bg,s,D9D9C1&chxl=0:|Schlecht        ||          Gut&chxp=0,0,,100&chxt=y&chs=175x110&cht=gm&chco=76A4FB95&chd=t:<%= user.mind + 50 %>&chl=<%= user.mind %>" width="175" height="110" alt="" />    
+    <p>Stimmengewicht: <%= user.votePower %></p>
     <p>Anzahl der positiv bewerteten Kommentare: <%= user.numberOfPosVotedPosts %></p>
     <p>Anzahl der negativ bewerteten Kommentare: <%= user.numberOfNegVotedPosts %></p>
 

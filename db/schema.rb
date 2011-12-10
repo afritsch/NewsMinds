@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124163313) do
+ActiveRecord::Schema.define(:version => 20111210153651) do
 
   create_table "daly_news", :force => true do |t|
     t.string   "title"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20111124163313) do
     t.integer  "numberOfPosCreatedPosts"
     t.integer  "numberOfNegCreatedPosts"
     t.integer  "mind"
+    t.integer  "votePower"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

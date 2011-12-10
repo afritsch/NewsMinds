@@ -5,15 +5,10 @@
     handler = NewsHandler.new
 
     if handler.isNewMonth? 
-      handler.eraseOldTopStoryEntries
+      handler.eraseOldTopStoryEntries # erases old top stories except youngest
       handler.eraseOldPosts
     end
 
-    respond_to do |format|
-      format.html
-      format.xml  
-    end
-   
   end
 
 end

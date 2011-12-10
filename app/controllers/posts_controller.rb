@@ -1,5 +1,5 @@
 ﻿class PostsController < ApplicationController
-  before_filter :get_post, :only => [:edit, :update]
+  before_filter :get_post, :only => [:edit]
 
   def get_post
     @post = Post.find( params[:id] )
@@ -68,19 +68,11 @@
 
 
   def edit
-    @post = Post.find( params[:id] )
-
-    respond_to do |format|
-      format.html      
-      format.xml { render :xml => @post }
-    end
-
   end
   
 
   def update
-    Post.find( params[:id] ).update_attributes( params[:post] )
- 
+    Post.find( params[:id] ).update_attributes( params[:post] ) 
     redirect_to(myposts_path, :notice => "Kommentar erfolgreich geändert")
   end 
   

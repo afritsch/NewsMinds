@@ -3,4 +3,9 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :format => { :with => /^\S{6,15}$/ }
 
   has_many :posts, :dependent => :destroy
+
+  def self.loggedInUser( username )
+    where( :username => username ).first
+  end
+
 end

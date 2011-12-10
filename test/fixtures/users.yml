@@ -8,6 +8,7 @@ one:
   numberOfPosCreatedPosts: 1
   numberOfNegCreatedPosts: 1
   mind: 1
+  votePower: 1
 
 two:
   username: MyString
@@ -17,3 +18,4 @@ two:
   numberOfPosCreatedPosts: 1
   numberOfNegCreatedPosts: 1
   mind: 1
+  votePower: 1

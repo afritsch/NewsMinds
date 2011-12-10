@@ -1,23 +1,6 @@
 ﻿class UserController < ApplicationController
   before_filter :getUser, :only => [:changeMind, :edit]
 
-  def getUser
-    @user = User.where( :username => session[:username] ).first
-  end
-
-
-  def changeNumberOfVotedPosts(answer)
-    
-    if answer.to_i == 1 
-      @user.numberOfPosVotedPosts += 1
-    else
-      @user.numberOfNegVotedPosts += 1
-    end
-    
-    @user.save
-
-  end
-
 
   # increases or decreases post score that is related to a user mind
   # note that this affects another user's mind
@@ -54,7 +37,6 @@
     
     respond_to do |format|
       format.html { redirect_to(root_path, :notice => "Erfolgreich Ausgeloggt") }
-      format.xml  { render :xml => {}, status => :ok }
     end
 
   end
@@ -62,21 +44,22 @@
 
   def login 
    
-    @user = User.where( :username => params[:username].upcase, :password => params[:password] )
-    
+    @user = User.where( :username => params[:username].upcase, :password => params[:password] ).first
+
+
     respond_to do |format|
 
-      if !@user.empty?
+      if !@user.nil?
+       
+        # if mind has changed this affects the votes the user is able to give
+        changeVotePower
         session[:username] = params[:username].upcase 
 
         format.html { redirect_to(root_path, :notice => "Erfolgreich eingeloggt") }
-        format.xml  { render :xml => {}, status => :ok }
       else
         format.html { redirect_to(root_path, :notice => "Falsche Eingabe") }
-        format.xml  { render :xml => @user.errors, status => :unprocessable_entity }
       end
     end
-
   end
 
   
@@ -106,14 +89,13 @@
         @user.numberOfPosVotedPosts = 0 
         @user.numberOfNegVotedPosts = 0 
         @user.mind = 0
+        @user.votePower = 1
         @valid = @user.save
         
 	if @valid
           format.html  { redirect_to(root_path, :notice => "Erfolgreich registriert") }
-          format.json  { render :json => @user, :status => :created, :location => root_path }
         else
 	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss zwischen 4 und 12 Zeichen lang sein und Passwort muss zwischen 6 und 15 Zeichen lang sein.") }
-          format.json  { render :json => @user.errors, :status => :unprocessable_entity }
 	end
 
       else
@@ -123,16 +105,46 @@
 
   end
 
+
   def edit
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @user }
-    end
   end
+
 
   def update
     User.where( :username => session[:username] ).first.update_attributes( params[:user] )
     redirect_to(profile_path, :notice => "Userdaten erfolgreich geändert")
+  end
+
+
+  private
+
+  def getUser
+    @user = User.where( :username => session[:username] ).first
+  end
+
+
+  def changeNumberOfVotedPosts(answer)
+    
+    if answer.to_i == 1 
+      @user.numberOfPosVotedPosts += 1
+    else
+      @user.numberOfNegVotedPosts += 1
+    end
+    
+    @user.save
+
+  end
+  
+
+  def changeVotePower
+    case @user.mind
+    when -50...-30 then @user.votePower = 0
+    when -30...20 then @user.votePower = 1
+    when 20...30 then @user.votePower = 2
+    when 30...50 then @user.votePower = 3
+    end
+
+    @user.save
   end
 
 end
