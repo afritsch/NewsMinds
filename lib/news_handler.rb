@@ -32,7 +32,7 @@ class NewsHandler
   
   # the deadline of a topstory is 12 o clock the day after it was elected 
   def hasTopStoryDeadlineEnded?
-    TopStory.last.pubDate.slice(11..12).to_i > 11 
+    Time.now.to_s.slice(11..12).to_i > 11 
   end
 
 
