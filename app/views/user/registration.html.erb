@@ -1,18 +1,13 @@
-﻿<h1>Registrierung:</h1>
-<%= form_for @user, :url => { :action => "create" } do |f| %> 
- 
-  <p>
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </p>
+﻿<h2>Registrierung:</h2>
 
-  <p>
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </p>
+<table>
+<%= form_for @user, :url => { :action => "create" } do |f| %>
+    
+<tr><td>Username</td><td><%= f.text_field :username %></td></tr>
 
-  <p>
-    <%= f.submit %>
-  </p>
+<tr><td>Passwort</td><td><%= f.password_field :password %></td></tr>
+    
+<tr><td><%= f.submit ' Registrieren '%></td><td></td></tr>
 
 <% end %>
+</table>

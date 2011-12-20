@@ -1,6 +1,8 @@
 ﻿<h2>Tagesthemenarchiv: </h2>
 
 <% @top_stories.each do |story| %>
-<p><b>Datum <%= story.pubDate.slice(0..9) %></b>: <%= link_to story.title, prev_days_path(story.id) %></p>
-
+<div>
+<h4><%= story.pubDate.slice(0..9) %></h4>
+<%= link_to story.title, prev_days_path(story.id) %>
+</div>
 <% end %>

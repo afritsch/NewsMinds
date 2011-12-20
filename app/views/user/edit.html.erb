@@ -1,6 +1,10 @@
-﻿<% form_for(@user) do |u| %>
-  <%= u.label :password %>
-  <%= u.text_field :password %>
+﻿<h2>Passwort ändern</h2>
 
-  <%= u.submit 'Ändern' %>
+<table>
+<% form_for(@user) do |u| %>
+  
+<tr><td>Neues Passwort</td><td><%= u.password_field :password %></td></tr>
+
+<tr><td><%= u.submit ' Ändern ' %></td><td></td></tr>
 <% end %>
+</table>

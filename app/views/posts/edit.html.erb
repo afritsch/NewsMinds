@@ -1,13 +1,13 @@
-﻿<% form_for(@post) do |p| %>
+﻿<table>
+<% form_for(@post) do |p| %>
 
 <%= hidden_field_tag(:id, @post.id) %>
 
-<b>Titel:</b>
-<%= p.text_field :title %>
+<tr><td>Titel:</td><td><%= p.text_field :title %></td></tr>
 
-<p>Inhalt:<p>
-<%= p.text_area :content %>
+<tr><td>Inhalt:</td><td><%= p.text_area :content %></td></tr>
 
-<%= p.submit 'Bearbeitet' %>
+<tr><td><%= p.submit ' Fertig ' %></td><td></td></tr>
 
 <% end %>
+</table>

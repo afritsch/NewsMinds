@@ -1,20 +1,21 @@
 ﻿<h2>Zum Thema: <%= @top_story.title %></h2>
 
+<table>
 <% form_for(@post) do |p| %>
 
 <%= hidden_field_tag(:top_story_id, @top_story.id) %>
 <%= hidden_field_tag(:user_id, @user_id) %>
 
-<b>Titel:</b>
-<%= p.text_field :title %>
+<tr><td>Titel:</td><td><%= p.text_field :title %></td></tr>
 
-<p>Inhalt:<p>
-<%= p.text_area :content %>
+<tr><td>Inhalt:</td><td><%= p.text_area :content %></td></tr>
 
-<p>Bewertung</p>
-<b>positiv: </b><%= radio_button_tag 'estimation', "positiv" %>
-<b>negativ: </b><%= radio_button_tag 'estimation', "negativ" %>
+<tr><td>Bewertung</td><td></td></tr>
 
-<p><%= p.submit 'Erstellen' %></p>
+<tr><td>positiv:</td><td><%= radio_button_tag 'estimation', "positiv" %></td></tr>
+<tr><td>negativ:</td><td><%= radio_button_tag 'estimation', "negativ" %></td></tr>
+
+<tr><td><%= p.submit ' Erstellen ' %></td><td></td></tr>
+</table>
 
 <% end %>

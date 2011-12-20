@@ -1,19 +1,13 @@
-﻿<h2>vergangenes Tagesthema</h2>
+﻿<h2>Tagesthema vom <%= @top_stories.pubDate.slice(5..10) %></h2>
+	<h4><%= raw @top_stories.title %></h4>
+  <div><%= raw @top_stories.description %></div>
 
-<h1>Tagesthema vom <%= @top_stories.pubDate.slice(5..10) %></h1>
-			<table>
-			<tr><td><h4><%= raw @top_stories.title %></h4></td></tr><tr><td><%= raw @top_stories.description %></td></tr> 
-
-			</table>
-<hr />
-
-<table>	
 <% @top_stories.posts.each do |post| %>
-
-  <tr><td>Titel: </td><td><b><%= post.title %></b></td></tr>
-  <tr><td>Beschreibung: </td><td><p><%= post.content %></p</td></tr>
-  <tr><td>Score: </td><td><p><%= post.score %></p</td></tr>
-  <tr><td></td</tr>
-
+  
+  <div class="post">
+  <h4><%= post.title %></h4>
+  <%= post.content %><br />
+  Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %>
+  </div>
+  
 <% end %>
-</table>

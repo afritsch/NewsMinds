@@ -1,6 +1,6 @@
 ﻿<h2>Thema gewählt</h2>
 
-<b>Für Thema  </b><b><%=  @voted_news[0].title %></b><div>gestimmt</div>
-<p>Stimmen derzeit: </p><b><%= @voted_news[0].clicks.to_s %></b>
-
-
+<div>
+Für Thema <span class="voted"><%=  @voted_news[0].title %></span>gestimmt<br />
+<span class="votes">Stimmen derzeit: <%= @voted_news[0].clicks.to_s %></span>
+</div>
