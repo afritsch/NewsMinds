@@ -1,10 +1,5 @@
 ﻿class PostsController < ApplicationController
-  before_filter :get_post, :only => [:edit]
-
-  def get_post
-    @post = Post.find( params[:id] )
-  end
-
+  before_filter :getPost, :only => [:edit] 
 
   def userPosts 
     @posts = User.where( :username => session[:username] ).first.posts
@@ -66,26 +61,13 @@
     Post.find( params[:id] ).update_attributes( params[:post] ) 
     redirect_to(myposts_path, :notice => "Kommentar erfolgreich geändert")
   end 
+   
+   
+  private
+
+  def getPost
+    @post = Post.find( params[:id] )
+  end
   
-
-  def destroy
-    @post = User.where( :username => session[:username] ).first.posts.find( params[:id] )
-    @post.user_id = nil
-    @post.save
-    
-    redirect_to(myposts_path, :notice => "Kommentar erfolgreich gelöscht")
-  end
-
- 
-  def destroy_all
-    @all_posts = User.where( :username => session[:username] ).first.posts
-    
-    for i in 0...@all_posts.count
-      @all_posts[i].user_id = nil
-      @all_posts[i].save
-    end
-    
-    redirect_to(myposts_path, :notice => "Alle Kommentare erfolgreich gelöscht")
-  end
 
 end

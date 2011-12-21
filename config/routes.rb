@@ -38,8 +38,6 @@ Qpt2a::Application.routes.draw do
     match "posts/:top_story_id/new" => "Posts#new", :as => "new_post"
     match "posts/:id/edit" => "Posts#edit", :as => "edit_post"
     match "myposts" => "Posts#userPosts", :as => "myposts"
-    match "posts/destroy/all" => "Posts#destroy_all", :as => "destroy_all" 
-    match "posts/destroy/:id" => "Posts#destroy", :as => "destroy"
 
 
   get "home/index"
