@@ -8,7 +8,7 @@
   def voteForTheme
    
     if cookies[:voted] != nil 
-      redirect_to(root_path, :notice => "Du hast schon abgestimmt")
+      redirect_to(choose_theme_path, :notice => "Du hast schon abgestimmt")
     else
      
       if session[:username]
@@ -20,7 +20,7 @@
         @voted_news[0].save
 
       else
-        redirect_to(root_path, :notice => "Du musst dich registrieren, um abstimmen zu können")
+        redirect_to(choose_theme_path, :notice => "Du musst dich registrieren, um abstimmen zu können")
 
       end
 

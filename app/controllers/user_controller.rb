@@ -14,17 +14,18 @@
       @post.voted_usernames += session[:username] + " "
 
       if params[:post_estimation] == params[:answer]
-	@post.score += 1
-	@post.user.mind += 1 if @post.user.mind < 50
+        @post.score += 1
+        @post.user.mind += 1 if @post.user.mind < 50
       else
-	@post.score -= 1
-	@post.user.mind -= 1 if @post.user.mind > -50
+        @post.score -= 1
+        @post.user.mind -= 1 if @post.user.mind > -50
       end
       
       @post.user.save
       @post.save
       
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
+    
     else
       redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um Kommentare bewerten zu können")
     end
@@ -35,10 +36,7 @@
   def logout
     session.delete(:username)
     
-    respond_to do |format|
-      format.html { redirect_to(root_path, :notice => "Erfolgreich Ausgeloggt") }
-    end
-
+    redirect_to(root_path, :notice => "Erfolgreich Ausgeloggt")
   end
 
 
@@ -46,30 +44,24 @@
    
     @user = User.where( :username => params[:username].upcase, :password => params[:password] ).first
 
-
-    respond_to do |format|
-
       if !@user.nil?
-       
+      
         # if mind has changed this affects the votes the user is able to give
         changeVotePower
+		
         session[:username] = params[:username].upcase 
 
-        format.html { redirect_to(root_path, :notice => "Erfolgreich eingeloggt") }
+        redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
+      
       else
-        format.html { redirect_to(root_path, :notice => "Falsche Eingabe") }
+        redirect_to(root_path, :notice => "Falsche Eingabe")
       end
-    end
+
   end
 
   
   def registration
     @user = User.new
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @user }
-    end
   end
  
  
@@ -79,8 +71,6 @@
     @user.username = @user.username.upcase
     
     @doesNotExist = User.where(:username => @user.username)
-    
-    respond_to do |format|
 
       if @doesNotExist.empty? 
 
@@ -92,20 +82,19 @@
         @user.votePower = 1
         @valid = @user.save
         
-	if @valid
-          format.html  { redirect_to(root_path, :notice => "Erfolgreich registriert") }
+        if @valid
+          redirect_to(root_path, :notice => "Erfolgreich registriert")
         else
-	  format.html  { redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss zwischen 4 und 12 Zeichen lang sein und Passwort muss zwischen 6 und 15 Zeichen lang sein.") }
-	end
+          redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss zwischen 4 und 12 Zeichen lang sein und Passwort muss zwischen 6 und 15 Zeichen lang sein.")
+        end
 
       else
         redirect_to(root_path, :notice => "Username schon belegt") 
       end
-    end
 
   end
 
-
+  
   def edit
   end
 

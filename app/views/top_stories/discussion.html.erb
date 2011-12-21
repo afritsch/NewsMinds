@@ -1,7 +1,5 @@
 ﻿<h2>Tagesthema</h2>
 
-<% if @latest_top_story != nil %>
-
 <div>
 				
 <h3><%= raw @latest_top_story.title %></h3>
@@ -9,23 +7,27 @@
 
 </div>
 
-<%= link_to 'Post erstellen', new_post_path(@latest_top_story.id) %>
+<%= link_to 'Kommentar erstellen', new_post_path(@latest_top_story.id) %>
 
 <% @latest_top_story.posts.each do |post| %>
 
   <div class="post">
   <h4><%= post.title %></h4>
   <%= post.content %><br />
-  Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %>
+  
+  <% if post.user != nil %>
+    
+    <% if isUserLoggedIn && !doesPostBelongToUser(session[:username], post.user.username) && !hasUserAlreadyVoted(post.voted_usernames, session[:username]) %>
+      <%= link_to 'Finde ich gut', user_mind_path(1, post.estimation, post.id) %>  &lt; &gt;
+      <%= link_to 'Finde ich schlecht', user_mind_path(0, post.estimation, post.id) %> 
+    <% end %>
+  
+  <% else %>
+    Von: <span class="username">Kommentar von User gelöscht </span> Postscore: <%= post.score %>
+  <% end %>
+  
+  
   </div>
   
-  <% if isUserLoggedIn && !doesPostBelongToUser(session[:username], post.user.username) && !hasUserAlreadyVoted(post.voted_usernames, session[:username]) %>
-    <%= link_to 'Finde ich gut', user_mind_path(1, post.estimation, post.id) %>
-    <%= link_to 'Finde ich schlecht', user_mind_path(0, post.estimation, post.id) %>
-  <% end %>
-
 <% end %>	
 
-<% else %>
-    <div>Es wurde noch kein Thema als Tagesthema gewählt</div> 
-<% end %>

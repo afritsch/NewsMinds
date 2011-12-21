@@ -8,11 +8,6 @@
 
   def userPosts 
     @posts = User.where( :username => session[:username] ).first.posts
- 
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @posts }
-    end
   end
 
 
@@ -23,11 +18,7 @@
       @top_story = TopStory.find( params[:top_story_id] )
 
       @user_id = User.where( :username => session[:username] ).first.id
- 
-      respond_to do |format|
-        format.html
-        format.xml { render :xml => @post }
-      end 
+
     else
       redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um einen Kommentar erstellen zu können")
     end
@@ -78,15 +69,22 @@
   
 
   def destroy
-    User.where( :username => session[:username] ).first.posts.find( params[:id] ).destroy
+    @post = User.where( :username => session[:username] ).first.posts.find( params[:id] )
+    @post.user_id = nil
+    @post.save
     
     redirect_to(myposts_path, :notice => "Kommentar erfolgreich gelöscht")
   end
 
  
   def destroy_all
-    User.where( :username => session[:username] ).first.posts.destroy_all
-   
+    @all_posts = User.where( :username => session[:username] ).first.posts
+    
+    for i in 0...@all_posts.count
+      @all_posts[i].user_id = nil
+      @all_posts[i].save
+    end
+    
     redirect_to(myposts_path, :notice => "Alle Kommentare erfolgreich gelöscht")
   end
 

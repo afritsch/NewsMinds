@@ -24,7 +24,6 @@ margin-right: auto;
 margin-top: 20px;
 margin-bottom: 20px;
 color: rgb(0, 0, 0);
-box-shadow: 10px 10px 6px rgb(100, 100, 100);
 border-left: 1px solid rgb(0, 0, 0);
 border-right: 1px solid rgb(0, 0, 0);
 }
@@ -122,6 +121,7 @@ float: left;
 margin: 10px 0 10px 10px;
 padding-right: 10px;
 text-align: justify;
+border-right: 1px solid rgb(0,0,0);
 }
 
 .themeheader {
@@ -171,7 +171,6 @@ padding-left: 10px;
 margin-right: 10px;
 margin-top: 10px;
 margin-bottom: 10px;
-border-left: 1px solid rgb(0, 0, 0);
 }
 
 #rightbar h3 {
@@ -198,6 +197,10 @@ margin: 0 0 0 10px;
 
 #oldthemes {
 margin-top: 1em;
+}
+
+#oldthemes a {
+margin-right: 0.5em;
 }
 
 #copy {
