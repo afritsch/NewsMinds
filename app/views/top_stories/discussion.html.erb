@@ -15,19 +15,12 @@
   <h4><%= post.title %></h4>
   <%= post.content %><br />
   
-  <% if post.user != nil %>
-    
-    Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %><br />
-    <% if isUserLoggedIn && !doesPostBelongToUser(session[:username], post.user.username) && !hasUserAlreadyVoted(post.voted_usernames, session[:username]) %>
-      <%= link_to 'Finde ich gut', user_mind_path(1, post.estimation, post.id) %>  &lt; &gt;
-      <%= link_to 'Finde ich schlecht', user_mind_path(0, post.estimation, post.id) %> 
-    <% end %>
-  
-  <% else %>
-    Von: <span class="username">Kommentar von User gelöscht </span> Postscore: <%= post.score %>
+  Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %><br />
+  <% if isUserLoggedIn && !doesPostBelongToUser(session[:username], post.user.username) && !hasUserAlreadyVoted(post.voted_usernames, session[:username]) %>
+    <%= link_to 'Finde ich gut', user_mind_path(1, post.estimation, post.id) %>  &lt; &gt;
+    <%= link_to 'Finde ich schlecht', user_mind_path(0, post.estimation, post.id) %> 
   <% end %>
-  
-  
+ 
   </div>
   
 <% end %>	

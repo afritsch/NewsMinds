@@ -103,7 +103,11 @@
     User.where( :username => session[:username] ).first.update_attributes( params[:user] )
     redirect_to(profile_path, :notice => "Userdaten erfolgreich geändert")
   end
-
+  
+  def facebookLogin
+    redirect_to(choose_theme_path, :notice => "Facebook Login success#{request.env['omniauth.auth']}")
+  end
+  
 
   private
 

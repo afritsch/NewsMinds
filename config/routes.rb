@@ -1,8 +1,12 @@
 Qpt2a::Application.routes.draw do
   
+  root :to => "Home#index"
+  
+  get "home/index"
+  
   resources :home
 
-
+  
   get "user/register"
 
   resources :user
@@ -12,7 +16,8 @@ Qpt2a::Application.routes.draw do
     match 'User/create' => "User#create", :as => "create"
     match 'User/changeMind/:answer/:post_estimation/:post_id' => "User#changeMind", :as => "user_mind"  
     match 'User/profile' => "User#edit", :as => "profile"
-
+    match "auth/:facebook/callback" => "User#facebookLogin"
+  
 
   get "daly_news/chooseTheme"
   get "daly_news/voteForTheme" 
@@ -39,8 +44,4 @@ Qpt2a::Application.routes.draw do
     match "posts/:id/edit" => "Posts#edit", :as => "edit_post"
     match "myposts" => "Posts#userPosts", :as => "myposts"
 
-
-  get "home/index"
-  root :to => "Home#index"
-  
 end

@@ -7,6 +7,8 @@ gem 'rails', '3.0.9'
 #
 # gem 'sqlite3'
 
+gem 'omniauth', '0.1.6'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -31,6 +33,6 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-#group :production do
-#  gem 'mysql2', "0.2.17"
-#end
+group :production do
+  gem 'mysql2', "0.2.17"
+end

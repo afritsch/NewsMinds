@@ -1,4 +1,5 @@
-﻿
+﻿<h2>Eigene Kommentare</h2>
+
 <% if @posts.empty? %>
 <h4>Noch keine Kommentare vorhanden</h4>
 
@@ -6,29 +7,17 @@
   <% @posts.each do |post| %>
 
   <div class="postdetails">
-  <h4>Tagesthema:</h4>
-  <div><%= post.top_story.title %></div>
-  <h4>Kommentar:</h4>
-  <div><%= post.title %></div>
-  <div><%= post.content %></div>
-
-  <h4>Score:</h4>
-  <div><%= post.score %></div>
-
-  <h4>Bewertung:</h4>
-  <div><% if post.estimation == 1 %>
-       Positiv
-     <% else %>
-       Negativ
-     <% end %>
-  </div>
+  <span class="voted">Tagesthema: </span><%= post.top_story.title %><br />
+  <span class="voted">Kommentar: </span><span class="italic"><%= post.title %></span><%= link_to 'Kommentar ändern', edit_post_path(post.id) %><br />
+  <span class="voted">Score:</span> <%= post.score %> <span class="voted">Bewertung: </span> 
+  <% if post.estimation == 1 %>
+    Positiv
+  <% else %>
+    Negativ
+  <% end %>
   </div>
   
-  <%= link_to 'Kommentar ändern', edit_post_path(post.id) %><br />
-  <%= link_to 'Kommentar aus Liste entfernen', destroy_path(post.id) %>
+  
   <% end %>
-<br />
-<br />
-<%= link_to 'Alle Kommentare löschen', destroy_all_path %>
 
 <% end %>

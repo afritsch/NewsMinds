@@ -37,6 +37,12 @@
 
 <% if session[:username] == nil %>
 
+<form action="/auth/facebook">
+<table>
+<tr><td><input type="submit" value="Facebook-Login" /></td></tr>
+</table>
+</form>
+
 <form action="<%= login_path %>" method="POST">
 <table>
 <tr><td><%= link_to 'Registrieren', register_path %></td></tr>

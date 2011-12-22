@@ -8,11 +8,7 @@
   <h4><%= post.title %></h4>
   <%= post.content %><br />
   
-  <% if post.user != nil %>
-    Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %>
-  <% else %>
-    Von: <span class="username">Kommentar von User gelöscht </span> Postscore: <%= post.score %>
-  <% end %>
+  Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %>
   </div>
   
 <% end %>

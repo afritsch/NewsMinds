@@ -152,6 +152,11 @@ font-weight: bold;
 margin-top: 1em;
 }
 
+.italic {
+font-style: italic;
+margin-right: 1em;
+}
+
 .username {
 font-weight: bold;
 }
