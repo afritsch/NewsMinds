@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111210153651) do
+ActiveRecord::Schema.define(:version => 20111222172116) do
 
   create_table "daly_news", :force => true do |t|
     t.string   "title"
@@ -33,9 +33,6 @@ ActiveRecord::Schema.define(:version => 20111210153651) do
     t.datetime "updated_at"
   end
 
-  add_index "posts", ["top_story_id"], :name => "index_posts_on_top_story_id"
-  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
-
   create_table "top_stories", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -54,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20111210153651) do
     t.integer  "numberOfNegCreatedPosts"
     t.integer  "mind"
     t.integer  "votePower"
+    t.string   "facebookEmail"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

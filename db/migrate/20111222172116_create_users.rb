@@ -9,6 +9,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :numberOfNegCreatedPosts
       t.integer :mind
       t.integer :votePower
+      t.string :facebookEmail
 
       t.timestamps
     end

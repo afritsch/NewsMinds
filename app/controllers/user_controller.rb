@@ -1,7 +1,7 @@
 ﻿class UserController < ApplicationController
   before_filter :getUser, :only => [:changeMind, :edit]
 
-
+  
   # increases or decreases post score that is related to a user mind
   # note that this affects another user's mind
   def changeMind
@@ -45,12 +45,11 @@
     @user = User.where( :username => params[:username].upcase, :password => params[:password] ).first
 
       if !@user.nil?
-      
-        # if mind has changed this affects the votes the user is able to give
-        changeVotePower
-		
+        
+        changeVotePower(@user)
+        
         session[:username] = params[:username].upcase 
-
+        
         redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
       else
@@ -70,9 +69,9 @@
     
     @user.username = @user.username.upcase
     
-    @doesNotExist = User.where(:username => @user.username)
+    doesNotExist = User.where(:username => @user.username)
 
-      if @doesNotExist.empty? 
+      if doesNotExist.empty? 
 
         @user.numberOfPosCreatedPosts = 0 
         @user.numberOfNegCreatedPosts = 0 
@@ -105,7 +104,23 @@
   end
   
   def facebookLogin
-    redirect_to(choose_theme_path, :notice => "Facebook Login success#{request.env['omniauth.auth']}")
+    
+    fbHash = request.env['omniauth.auth']
+    
+    valid = User.where(:facebookEmail => fbHash['info']['email']).first
+    
+    if !valid.nil?
+      
+      changeVotePower(valid)
+      
+      session[:username] = params[:username].upcase 
+
+      redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
+      
+    else
+      redirect_to(root_path, :notice => "Falsche Eingabe")
+    end
+    
   end
   
 
@@ -128,16 +143,17 @@
 
   end
   
-
-  def changeVotePower
-    case @user.mind
+  
+  # if mind has changed this affects the votes the user is able to give
+  def changeVotePower(user)
+    case user.mind
     when -50...-30 then @user.votePower = 0
     when -30...20 then @user.votePower = 1
     when 20...30 then @user.votePower = 2
     when 30...50 then @user.votePower = 3
     end
 
-    @user.save
+    user.save
   end
 
 end

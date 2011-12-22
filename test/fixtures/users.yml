@@ -9,6 +9,7 @@ one:
   numberOfNegCreatedPosts: 1
   mind: 1
   votePower: 1
+  facebookEmail: MyString
 
 two:
   username: MyString
@@ -19,3 +20,4 @@ two:
   numberOfNegCreatedPosts: 1
   mind: 1
   votePower: 1
+  facebookEmail: MyString
