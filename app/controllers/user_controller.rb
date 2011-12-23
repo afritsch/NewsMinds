@@ -187,7 +187,7 @@ class UserController < ApplicationController
     
     return false if facebookEmail.eql?""
     
-    !User.where(:facebookEmail => facebookEmail).first.nil?
+    !(User.where(:facebookEmail => facebookEmail).first.nil?)
   end
   
 
