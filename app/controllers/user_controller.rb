@@ -134,8 +134,10 @@ class UserController < ApplicationController
   def facebookLogin
     
     fbHash = request.env['omniauth.auth']
+    redirect_to(root_path, :notice => fbHash)
+    return
     
-    valid = User.where(:facebookEmail => fbHash['info']['email']).first
+    valid = User.where(:facebookEmail => fbHash['extra']['email']).first
     
     if !valid.nil?
       
