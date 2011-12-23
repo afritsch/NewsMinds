@@ -1,5 +1,7 @@
-﻿class UserController < ApplicationController
-  before_filter :getUser, :only => [:changeMind, :edit]
+﻿require 'digest/sha1'
+
+class UserController < ApplicationController
+  before_filter :getUser, :only => [:changeMind, :edit, :updatePassword, :newPassword]
 
   
   # increases or decreases post score that is related to a user mind
@@ -42,13 +44,13 @@
 
   def login 
    
-    @user = User.where( :username => params[:username].upcase, :password => params[:password] ).first
+    @user = User.where( :username => params[:username], :password => Digest::SHA1.hexdigest(params[:password]) ).first
 
       if !@user.nil?
         
         changeVotePower(@user)
         
-        session[:username] = params[:username].upcase 
+        session[:username] = params[:username] 
         
         redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
@@ -65,30 +67,28 @@
  
  
   def create
-    @user = User.create(params[:user])
+    user = User.new(params[:user])
     
-    @user.username = @user.username.upcase
-    
-    doesNotExist = User.where(:username => @user.username)
-
-      if doesNotExist.empty? 
-
-        @user.numberOfPosCreatedPosts = 0 
-        @user.numberOfNegCreatedPosts = 0 
-        @user.numberOfPosVotedPosts = 0 
-        @user.numberOfNegVotedPosts = 0 
-        @user.mind = 0
-        @user.votePower = 1
-        @valid = @user.save
+      if !doesUserExist?(user.username) && !doesFacebookEmailExist?(user.facebookEmail)
         
-        if @valid
-          redirect_to(root_path, :notice => "Erfolgreich registriert")
-        else
-          redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss zwischen 4 und 12 Zeichen lang sein und Passwort muss zwischen 6 und 15 Zeichen lang sein.")
+        if !user.valid?
+          redirect_to(root_path, :notice => "Username oder Passwort nicht gültig, Username muss mindestens 4 lang sein und darf nicht mit einer Zahl beginnen. Das Passwort muss mindestens 6 Zeichen lang sein. Außerdem dürfen der Username und das Passwort keine Leerzeichen enthalten.")
+          return
         end
+        
+        user.password = Digest::SHA1.hexdigest(user.password)
+        user.numberOfPosCreatedPosts = 0 
+        user.numberOfNegCreatedPosts = 0 
+        user.numberOfPosVotedPosts = 0 
+        user.numberOfNegVotedPosts = 0 
+        user.mind = 0
+        user.votePower = 1
+        
+        user.save
+        redirect_to(root_path, :notice => "Erfolgreich registriert")
 
       else
-        redirect_to(root_path, :notice => "Username schon belegt") 
+        redirect_to(root_path, :notice => "Username oder Facebook Email Adresse schon vorhanden!") 
       end
 
   end
@@ -97,11 +97,39 @@
   def edit
   end
 
-
   def update
-    User.where( :username => session[:username] ).first.update_attributes( params[:user] )
-    redirect_to(profile_path, :notice => "Userdaten erfolgreich geändert")
+    
+    user = User.where( :username => session[:username] ).first
+    
+    if !params[:user][:password].nil?
+      
+      user.password = params[:user][:password]
+    
+      if !user.valid? 
+        redirect_to(profile_path, :notice => "Passwort nicht verifiziert.") 
+        return
+      else
+        user.password = Digest::SHA1.hexdigest(user.password)
+        user.update_attributes( params[:user][:password] ) 
+      end
+
+    end
+  
+    if !params[:user][:facebookEmail].nil?
+    
+      if doesFacebookEmailExist?( params[:user][:facebookEmail] )
+        redirect_to(profile_path, :notice => "FacebookEmail schon vorhanden.") 
+        return
+      else
+        user.update_attributes( :facebookEmail => params[:user][:facebookEmail] ) 
+      end
+      
+    end
+  
+    redirect_to(profile_path, :notice => "Userdaten erfolgreich geändert.")
+    
   end
+  
   
   def facebookLogin
     
@@ -113,7 +141,7 @@
       
       changeVotePower(valid)
       
-      session[:username] = params[:username].upcase 
+      session[:username] = params[:username] 
 
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
@@ -123,13 +151,45 @@
     
   end
   
+  
+  def newPassword
+    if !(@user.password.eql? Digest::SHA1.hexdigest(params[:oldPassword]) )
+      redirect_to(profile_path, :notice => "Falsches Passwort")
+    end
+    
+    @user.password = ""
+    @user.save
+  end
+  
 
   private
 
   def getUser
     @user = User.where( :username => session[:username] ).first
   end
-
+  
+  
+  def doesUserExist?(username)
+     
+    for i in 0...User.count
+      upperCaseUsername = User.all[i].username.upcase
+      
+      if username.upcase == upperCaseUsername
+        return true
+      end        
+    end
+    
+    return false
+  end
+  
+  
+  def doesFacebookEmailExist?(facebookEmail)
+    
+    return false if facebookEmail.eql?""
+    
+    !User.where(:facebookEmail => facebookEmail).first.nil?
+  end
+  
 
   def changeNumberOfVotedPosts(answer)
     

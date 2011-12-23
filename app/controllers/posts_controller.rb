@@ -7,7 +7,7 @@
 
 
   def new
-    if session[:username] != nil
+    if !session[:username].nil?
       @post = Post.new
 
       @top_story = TopStory.find( params[:top_story_id] )
@@ -22,28 +22,28 @@
 
   def create
 
-    @post = Post.create( params[:post] ) 
+    post = Post.new( params[:post] ) 
 
-    @post.top_story_id = params[:top_story_id]
-    @post.user_id = params[:user_id]
-    @post.score = 0
-    @post.voted_usernames = ""
+    post.top_story_id = params[:top_story_id]
+    post.user_id = params[:user_id]
+    post.score = 0
+    post.voted_usernames = ""
 
 
     if params[:estimation] == "positiv" 
-      @post.estimation = 1
+      post.estimation = 1
 
-      @post.user.numberOfPosCreatedPosts += 1
+      post.user.numberOfPosCreatedPosts += 1
     else
-      @post.estimation = 0
+      post.estimation = 0
 
-      @post.user.numberOfNegCreatedPosts += 1
+      post.user.numberOfNegCreatedPosts += 1
     end
 
-    @valid = @post.save
+    valid = post.save
     
-    if @valid
-      @post.user.save
+    if valid
+      post.user.save
 
       redirect_to(top_stories_path, :notice => "Kommentar erfolgreich erstellt")
     else

@@ -35,7 +35,7 @@
 
 <div id="header">
 
-<% if session[:username] == nil %>
+<% if session[:username].nil? %>
 
 <form action="/auth/facebook">
 <table>

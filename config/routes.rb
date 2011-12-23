@@ -16,6 +16,7 @@ Qpt2a::Application.routes.draw do
     match 'User/create' => "User#create", :as => "create"
     match 'User/changeMind/:answer/:post_estimation/:post_id' => "User#changeMind", :as => "user_mind"  
     match 'User/profile' => "User#edit", :as => "profile"
+    match 'User/newPassword' => "User#newPassword"
     match "auth/:facebook/callback" => "User#facebookLogin"
   
 
