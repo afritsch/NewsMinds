@@ -141,7 +141,7 @@ class UserController < ApplicationController
       
       changeVotePower(valid)
       
-      session[:username] = params[:username] 
+      session[:username] = valid.username
 
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
