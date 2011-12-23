@@ -207,10 +207,10 @@ class UserController < ApplicationController
   # if mind has changed this affects the votes the user is able to give
   def changeVotePower(user)
     case user.mind
-    when -50...-30 then @user.votePower = 0
-    when -30...20 then @user.votePower = 1
-    when 20...30 then @user.votePower = 2
-    when 30...50 then @user.votePower = 3
+    when -50...-30 then user.votePower = 0
+    when -30...20 then user.votePower = 1
+    when 20...30 then user.votePower = 2
+    when 30...50 then user.votePower = 3
     end
 
     user.save
