@@ -137,7 +137,7 @@ class UserController < ApplicationController
     redirect_to(root_path, :notice => fbHash)
     return
     
-    valid = User.where(:facebookEmail => fbHash['extra']['email']).first
+    valid = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
     
     if !valid.nil?
       
