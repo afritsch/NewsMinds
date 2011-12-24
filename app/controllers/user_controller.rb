@@ -146,7 +146,7 @@ class UserController < ApplicationController
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
     else
-      redirect_to(root_path, :notice => "Falsche Eingabe")
+      redirect_to(root_path, :notice => "Facebook Email Adresse nicht registriet")
     end
     
   end
