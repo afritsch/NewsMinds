@@ -4,27 +4,27 @@ class UserController < ApplicationController
   before_filter :getUser, :only => [:changeMind, :edit, :updatePassword, :newPassword]
 
   
-  # increases or decreases post score that is related to a user mind
+  # increases or decreases post score that is related to a user
   # note that this affects another user's mind
   def changeMind
     if !session[:id].nil?
       
       changeNumberOfVotedPosts( params[:post_estimation] )
 
-      @post = Post.where( :id => params[:post_id] ).first
+      post = Post.where( :id => params[:post_id] ).first
       
-      @post.voted_usernames += User.loggedInUser( session[:id] ).username + " "
+      post.voted_usernames += @user.username + " "
 
       if params[:post_estimation] == params[:answer]
-        @post.score += 1
-        @post.user.mind += 1 if @post.user.mind < 50
+        post.score += 1
+        post.user.mind += 1 if post.user.mind < 50
       else
-        @post.score -= 1
-        @post.user.mind -= 1 if @post.user.mind > -50
+        post.score -= 1
+        post.user.mind -= 1 if post.user.mind > -50
       end
       
-      @post.user.save
-      @post.save
+      post.user.save
+      post.save
       
       redirect_to(top_stories_path, :notice => "Kommentar bewertet")
     
@@ -165,7 +165,7 @@ class UserController < ApplicationController
   private
 
   def getUser
-    @user = User.where( :id => session[:id] ).first
+    @user = User.loggedInUser( session[:id] )
   end
   
   
