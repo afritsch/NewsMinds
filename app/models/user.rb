@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
 
   has_many :posts, :dependent => :destroy
 
-  def self.loggedInUser( username )
-    where( :username => username ).first
+  def self.loggedInUser( id )
+    where( :id => id ).first
   end
 
 end

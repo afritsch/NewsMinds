@@ -2,17 +2,17 @@
   before_filter :getPost, :only => [:edit] 
 
   def userPosts 
-    @posts = User.where( :username => session[:username] ).first.posts
+    @posts = User.where( :id => session[:id] ).first.posts
   end
 
 
   def new
-    if !session[:username].nil?
+    if !session[:id].nil?
       @post = Post.new
 
       @top_story = TopStory.find( params[:top_story_id] )
 
-      @user_id = User.where( :username => session[:username] ).first.id
+      @user_id = User.where( :id => session[:id] ).first.id
 
     else
       redirect_to(top_stories_path, :notice => "Du musst angemeldet sein, um einen Kommentar erstellen zu können")

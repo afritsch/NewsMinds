@@ -35,7 +35,7 @@
 
 <div id="header">
 
-<% if session[:username].nil? %>
+<% if session[:id].nil? %>
 
 <form action="/auth/facebook">
 <table>
@@ -100,7 +100,7 @@ NewsMinds
 
 <% if isUserLoggedIn  %>
   
-  <% user = User.where( :username => session[:username] ).first %>
+  <% user = User.loggedInUser( session[:id] ) %>
 
     Eingeloggt als<br />
     <span class="username"><%= user.username %></span><br />

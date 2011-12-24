@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def isUserLoggedIn
-    !session[:username].nil?
+    !session[:id].nil?
   end
   
   def hasGotTopStory?

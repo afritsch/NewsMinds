@@ -7,13 +7,13 @@ class UserController < ApplicationController
   # increases or decreases post score that is related to a user mind
   # note that this affects another user's mind
   def changeMind
-    if session[:username] != nil
+    if !session[:id].nil?
       
       changeNumberOfVotedPosts( params[:post_estimation] )
 
       @post = Post.where( :id => params[:post_id] ).first
       
-      @post.voted_usernames += session[:username] + " "
+      @post.voted_usernames += User.loggedInUser( session[:id] ).username + " "
 
       if params[:post_estimation] == params[:answer]
         @post.score += 1
@@ -36,7 +36,7 @@ class UserController < ApplicationController
 
 
   def logout
-    session.delete(:username)
+    session.delete(:id)
     
     redirect_to(root_path, :notice => "Erfolgreich Ausgeloggt")
   end
@@ -50,7 +50,7 @@ class UserController < ApplicationController
         
         changeVotePower(@user)
         
-        session[:username] = params[:username] 
+        session[:id] = @user.id 
         
         redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
@@ -99,7 +99,7 @@ class UserController < ApplicationController
 
   def update
     
-    user = User.where( :username => session[:username] ).first
+    user = User.where( :id => session[:id] ).first
     
     if !params[:user][:password].nil?
       
@@ -141,7 +141,7 @@ class UserController < ApplicationController
       
       changeVotePower(valid)
       
-      session[:username] = valid.username
+      session[:id] = valid.id
 
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
@@ -165,7 +165,7 @@ class UserController < ApplicationController
   private
 
   def getUser
-    @user = User.where( :username => session[:username] ).first
+    @user = User.where( :id => session[:id] ).first
   end
   
   
