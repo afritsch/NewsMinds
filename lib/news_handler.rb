@@ -8,7 +8,6 @@ class NewsHandler
     loadRSSFeeds
   end
 
-
   def copyRSSIntoDatabase
     DalyNews.destroy_all
 
@@ -52,7 +51,7 @@ class NewsHandler
     story.chosen = news.clicks
     story.save
   end
- 
+
 
   def isNewMonth?
     !(TopStory.first.pubDate.slice(5..6).eql? Time.now.to_s.slice(5..6)) 
@@ -85,7 +84,7 @@ class NewsHandler
     DalyNews.where( :clicks => number ).first
   end
 
-
+  
   # if the first feed is up to date data must not be loaded in again 
   def isDataUpToDate?
     DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)

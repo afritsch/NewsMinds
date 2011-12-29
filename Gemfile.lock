@@ -54,6 +54,7 @@ GEM
     mime-types (1.17.2)
     multi_json (0.0.5)
     multipart-post (1.1.4)
+    mysql2 (0.2.17)
     net-ldap (0.1.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -146,6 +147,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
+  mysql2 (= 0.2.17)
   omniauth (= 0.1.6)
   rails (= 3.0.9)
   sqlite3-ruby
