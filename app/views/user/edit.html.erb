@@ -9,7 +9,8 @@
 <% end %>
 
 <% form_for @user do |u| %>
-<tr><td>Facebook-Email</td><td><%= u.text_field :facebookEmail %></td></tr>
+<tr><td>Facebook-Email:</td></tr>
+<tr><td><%= u.text_field :facebookEmail %></td></tr>
 <tr><td><%= u.submit ' Ändern ' %></td></tr>
 <% end %>
 </table>
