@@ -158,7 +158,6 @@ class UserController < ApplicationController
     end
     
     @user.password = ""
-    @user.save
   end
   
 

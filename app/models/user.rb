@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  validates :username, :presence => true, :format => { :with => /^\D{1,1}\S{3}\S*$/ }
-  validates :password, :presence => true, :format => { :with => /^\S{6}\S*$/ }
+  validates :username, :presence => true, :format => { :with => /^\D{1,1}\S{3,}$/ }
+  validates :password, :presence => true, :format => { :with => /^\S{6,}$/ }
 
   has_many :posts, :dependent => :destroy
 

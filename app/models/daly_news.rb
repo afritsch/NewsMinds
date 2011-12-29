@@ -1,5 +1,5 @@
 class DalyNews < ActiveRecord::Base
   def self.onlyThemes
-    except(TopStory.last.id)
+    find(:all, :conditions => ["title != ?",TopStory.last.title])
   end
 end
