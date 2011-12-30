@@ -8,40 +8,40 @@ class TopStory < ActiveRecord::Base
     
   end
   
-#  def self.insertThemeIntoTopStoryDatabase 
-#    news = findMostClickedTheme
-#
-#   story = TopStory.new
-#    story.title = news.title
-#    story.description = news.description
-#    story.pubDate = Time.now.to_s
-#    story.chosen = news.clicks
-#    story.save
-#  end
-  
-#  def self.findMostClickedTheme
-#    number = 0
-#    DalyNews.all.each do |news|
-#      if news.clicks > number
-#        number = news.clicks
-#      end
-#    end
+  def self.insertThemeIntoTopStoryDatabase 
+    news = findMostClickedTheme
 
-#    DalyNews.where( :clicks => number ).first
-#  end
+   story = TopStory.new
+    story.title = news.title
+    story.description = news.description
+    story.pubDate = Time.now.to_s
+    story.chosen = news.clicks
+    story.save
+  end
   
-#  def self.copyRSSIntoDatabase
-#    DalyNews.destroy_all
+  def self.findMostClickedTheme
+    number = 0
+    DalyNews.all.each do |news|
+      if news.clicks > number
+        number = news.clicks
+      end
+    end
 
-#    for i in 0...@raw_data.items.count do
-#      news = DalyNews.new
-#      news.title = @raw_data.items[i].title
-#      news.description = @raw_data.items[i].description
-#      news.date = @raw_data.items[i].pubDate.to_s
-#      news.clicks = 0
-#      news.save       
-#    end
-#  end
+    DalyNews.where( :clicks => number ).first
+  end
+  
+  def self.copyRSSIntoDatabase
+    DalyNews.destroy_all
+
+    for i in 0...@raw_data.items.count do
+      news = DalyNews.new
+      news.title = @raw_data.items[i].title
+      news.description = @raw_data.items[i].description
+      news.date = @raw_data.items[i].pubDate.to_s
+      news.clicks = 0
+      news.save       
+    end
+  end
   
   has_many :posts, :dependent => :destroy
 end
