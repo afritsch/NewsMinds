@@ -8,6 +8,6 @@
 #end
 
 
-every 1.minute do
+every 2.minutes do
   runner "TopStory.copyRSSIntoDatabase"
 end
