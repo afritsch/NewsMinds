@@ -66,11 +66,6 @@ class NewsHandler
   end
 
 
-  def eraseOldPosts
-    Post.destroy_all
-  end
-
-
   private
 
   def findMostClickedTheme

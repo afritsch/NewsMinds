@@ -2,12 +2,11 @@
 
   def index
 
-    #handler = NewsHandler.new
+    handler = NewsHandler.new
 
-    #if handler.isNewMonth? 
-    #  handler.eraseOldTopStoryEntries # erases old top stories except youngest
-    #  handler.eraseOldPosts
-    #end
+    if handler.isNewMonth? 
+      handler.eraseOldTopStoryEntries # erases old top stories except youngest
+    end
 
   end
 
