@@ -15,7 +15,7 @@ gem 'omniauth', '0.1.6'
 # Deploy with Capistrano
 gem 'capistrano'
 
-gem 'whenever', :require => false
+#gem 'whenever', :require => false
 
 #
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
@@ -35,6 +35,6 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-group :production do
-  gem 'mysql2', "0.2.17"
-end
+#group :production do
+#  gem 'mysql2', "0.2.17"
+#end

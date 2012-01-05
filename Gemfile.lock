@@ -37,7 +37,6 @@ GEM
       net-sftp (>= 2.0.0)
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
-    chronic (0.6.6)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     faraday (0.5.7)
@@ -55,7 +54,6 @@ GEM
     mime-types (1.17.2)
     multi_json (0.0.5)
     multipart-post (1.1.4)
-    mysql2 (0.2.17)
     net-ldap (0.1.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -141,9 +139,6 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.31)
-    whenever (0.7.2)
-      activesupport (>= 2.3.4)
-      chronic (~> 0.6.3)
 
 PLATFORMS
   ruby
@@ -151,8 +146,6 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  mysql2 (= 0.2.17)
   omniauth (= 0.1.6)
   rails (= 3.0.9)
   sqlite3-ruby
-  whenever
