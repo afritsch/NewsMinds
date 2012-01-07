@@ -1,3 +1,5 @@
+# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
 module TopStoriesHelper
   def hasUserAlreadyVoted(usernames, logged_in_user_id)
     

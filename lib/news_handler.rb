@@ -1,3 +1,5 @@
+# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
 require 'rss/1.0'
 require 'rss/2.0'
 
@@ -9,10 +11,10 @@ class NewsHandler
   end
 
   def copyRSSIntoDatabase
-    DalyNews.destroy_all
+    DailyNews.destroy_all
 
     for i in 0...@raw_data.items.count do
-      news = DalyNews.new
+      news = DailyNews.new
       news.title = @raw_data.items[i].title
       news.description = @raw_data.items[i].description
       news.date = @raw_data.items[i].pubDate.to_s
@@ -70,19 +72,19 @@ class NewsHandler
 
   def findMostClickedTheme
     number = 0
-    DalyNews.all.each do |news|
+    DailyNews.all.each do |news|
       if news.clicks > number
         number = news.clicks
       end
     end
 
-    DalyNews.where( :clicks => number ).first
+    DailyNews.where( :clicks => number ).first
   end
 
   
   # if the first feed is up to date data must not be loaded in again 
   def isDataUpToDate?
-    DalyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
+    DailyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
   end
  
   

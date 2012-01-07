@@ -1,3 +1,5 @@
+# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
 Qpt2a::Application.routes.draw do
   
   root :to => "Home#index"
@@ -20,12 +22,12 @@ Qpt2a::Application.routes.draw do
     match "auth/:facebook/callback" => "User#facebookLogin"
   
 
-  get "daly_news/chooseTheme"
-  get "daly_news/voteForTheme" 
+  get "daily_news/chooseTheme"
+  get "daily_news/voteForTheme" 
 
-  resources :daly_news
-    match 'chooseTheme' => "DalyNews#chooseTheme", :as => "choose_theme"
-    match 'votedTheme/:id' => "DalyNews#voteForTheme"
+  resources :daily_news
+    match 'chooseTheme' => "DailyNews#chooseTheme", :as => "choose_theme"
+    match 'votedTheme/:id' => "DailyNews#voteForTheme"
  
  
   get "top_stories/discussion"

@@ -1,4 +1,6 @@
-﻿class HomeController < ApplicationController
+﻿# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
+class HomeController < ApplicationController
 
   def index
 

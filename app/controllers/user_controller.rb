@@ -1,4 +1,6 @@
-﻿require 'digest/sha1'
+﻿# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
+require 'digest/sha1'
 
 class UserController < ApplicationController
   before_filter :getUser, :only => [:changeMind, :edit, :updatePassword, :newPassword]
