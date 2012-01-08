@@ -49,6 +49,11 @@ into the empty attributes of dailyNews and TopStory. Otherwise you get an error
 reading the attributes containing nil objects. That's because we don't have a
 check if those are empty. That has to be done only the very first time or
 you create new empty database.
+This project needs a secret token. You have to put in /config/initializers
+a 'secret_token.rb'. The content must be:
+
+Qpt2a::Application.config.secret_token = 'abc123'
+
 
 
 3. Fun Facts
