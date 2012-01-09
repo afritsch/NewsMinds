@@ -1,3 +1,5 @@
+# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
 require 'rss/1.0'
 require 'rss/2.0'
 
@@ -25,10 +27,10 @@ class TopStory < ActiveRecord::Base
   
   #def self.copyRSSIntoDatabase
   #  loadRSSFeeds
-  #  DalyNews.destroy_all
+  #  DailyNews.destroy_all
 
   #  for i in 0...@raw_data.items.count do
-  #    news = DalyNews.new
+  #    news = DailyNews.new
   #    news.title = @raw_data.items[i].title
   #    news.description = @raw_data.items[i].description
   #    news.date = @raw_data.items[i].pubDate.to_s
@@ -50,13 +52,13 @@ class TopStory < ActiveRecord::Base
   
   #def self.findMostClickedTheme
   #  number = 0
-  #  DalyNews.all.each do |news|
+  #  DailyNews.all.each do |news|
   #    if news.clicks > number
   #      number = news.clicks
   #    end
   #  end
 
-  #  DalyNews.where( :clicks => number ).first
+  #  DailyNews.where( :clicks => number ).first
   #end
  
 end

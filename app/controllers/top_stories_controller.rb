@@ -1,4 +1,6 @@
-﻿class TopStoriesController < ApplicationController
+﻿# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas>
+
+class TopStoriesController < ApplicationController
 
   def discussion
     

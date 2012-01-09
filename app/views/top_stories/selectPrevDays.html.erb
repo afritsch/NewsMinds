@@ -1,4 +1,6 @@
-﻿<h2>Tagesthema vom <%= @top_stories.pubDate.slice(5..10) %></h2>
+﻿<%# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas> %>
+
+<h2>Tagesthema vom <%= @top_stories.pubDate.slice(5..10) %></h2>
 	<h3><%= raw @top_stories.title %></h3>
   <div><%= raw @top_stories.description %></div>
 

@@ -1,0 +1,13 @@
+﻿<%# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas> %>
+
+<h2>Themen wählen</h2>
+
+	<% @daily_news.each do |news| %>
+	  <div class="choosetheme">
+    <a href="votedTheme/<%= news.id %>">
+	  <span class="themeheader"><%= news.title %></span>
+    <%= raw news.description %>
+	  </a>
+	  </div>
+    <div class="currentvotes">Stimmen zurzeit: <%= news.clicks %></div>
+	<% end %>

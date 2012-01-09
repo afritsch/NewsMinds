@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(:version => 20111222172116) do
 
-  create_table "daly_news", :force => true do |t|
+  create_table "daily_news", :force => true do |t|
     t.string   "title"
     t.text     "description"
     t.string   "date"
