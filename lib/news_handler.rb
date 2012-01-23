@@ -17,8 +17,8 @@ class NewsHandler
       news = DailyNews.new
       news.title = @raw_data.items[i].title
       news.description = @raw_data.items[i].description
-      news.date = @raw_data.items[i].pubDate.to_s
       news.clicks = 0
+      news.theme_url = @raw_data.items[i].link.to_s
       news.save       
     end
   end
@@ -39,7 +39,7 @@ class NewsHandler
 
   # is there still a new TopStory theme
   def isTopStoryUpToDate?
-    TopStory.last.pubDate.slice(8..9).eql? Time.now.to_s.slice(8..9)
+    TopStory.last.created_at.strftime('%d').eql? Time.now.strftime('%d')
   end
   
  
@@ -49,14 +49,13 @@ class NewsHandler
     story = TopStory.new
     story.title = news.title
     story.description = news.description
-    story.pubDate = Time.now.to_s
     story.chosen = news.clicks
     story.save
   end
 
 
   def isNewMonth?
-    !(TopStory.first.pubDate.slice(5..6).eql? Time.now.to_s.slice(5..6)) 
+    !(TopStory.first.created_at.strftime('%m').eql? Time.now.strftime('%m')) 
   end
   
   

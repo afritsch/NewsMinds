@@ -10,3 +10,27 @@ Die Userinnen und User wählen dabei jeden Tag neue Themen aus, die dann abhäng
 <br />
 Das Bewertungssystem stellt dabei das Besondere im Vergleich zu anderen Diskussionsplattformen dar, denn durch das Einordnen von Kommentaren wird ein Persönlichkeitsbild der Userinnen und User erstellt. Bei langfristiger Nutzung von NewsMinds erhählt die Userinnen oder der User nicht nur mehr Information über Tagesgeschehen und mehr Abstimmungsrechte bei der Themenwahl, sondern eine Einblick über sein eigenes Ich.
 </div>
+
+
+<h2>Heutiges Tagesthema</h2>
+
+<div>
+				
+<h3><%= raw @latest_top_story.title %></h3>
+<div><%= raw @latest_top_story.description %></div>
+
+</div>
+
+<% if @latest_posts.count > 0 %>
+  <h3>Neueste Kommentare</h3>
+<% end %>
+
+<% @latest_posts.each do |post| %>
+  
+  <div class="post">
+  <h4><%= post.title %></h4>
+  <%= post.content %><br />
+  
+  Von: <span class="username"><%= post.user.username %></span> Postscore: <%= post.score %><br />
+  
+<% end %>

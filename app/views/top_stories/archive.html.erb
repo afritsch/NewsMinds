@@ -4,7 +4,7 @@
 
 <% @top_stories.each do |story| %>
 <div>
-<h4><%= story.pubDate.slice(0..9) %></h4>
+<h4><%= story.created_at.strftime('%a, %d.%m.') %></h4>
 <%= link_to story.title, prev_days_path(story.id) %>
 </div>
 <% end %>

@@ -3,11 +3,14 @@
 <h2>Themen wählen</h2>
 
 	<% @daily_news.each do |news| %>
-	  <div class="choosetheme">
-    <a href="votedTheme/<%= news.id %>">
-	  <span class="themeheader"><%= news.title %></span>
-    <%= raw news.description %>
-	  </a>
-	  </div>
-    <div class="currentvotes">Stimmen zurzeit: <%= news.clicks %></div>
+	  
+    <div class="choosetheme">
+    
+    <%= link_to(news, :method => :post) do %>
+      <span class="themeheader"><%= news.title %></span>
+      <%= raw news.description %>
+	  <% end %>
+	  
+    </div>
+    <div class="currentvotes"><%= link_to 'Zum Artikel', news.theme_url %>  Stimmen zurzeit: <%= news.clicks %></div>
 	<% end %>

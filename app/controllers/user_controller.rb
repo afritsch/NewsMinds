@@ -137,9 +137,10 @@ class UserController < ApplicationController
     
     fbHash = request.env['omniauth.auth']
     
-    valid = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
     
-    if !valid.nil?
+    doesExist = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
+    
+    if doesExist.nil?
       
       changeVotePower(valid)
       
@@ -148,7 +149,12 @@ class UserController < ApplicationController
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
     else
-      redirect_to(root_path, :notice => "Facebook Email Adresse nicht registriet")
+      
+      username = fbHash['extra']['user_hash']['first_name'] + fbHash['extra']['user_hash']['last_name']
+      
+      @user = User.new( :username => username, :facebookEmail => fbHash['extra']['user_hash']['email'] )
+      
+      redirect_to(register_path)
     end
     
   end

@@ -114,7 +114,7 @@ NewsMinds
 Letzte Tage: 
 <% all_stories = TopStory.all %> 	
     <% for i in 0...all_stories.count do %>
-      <%= link_to all_stories[i].pubDate.slice(5..10), prev_days_path(all_stories[i].id) %>
+      <%= link_to all_stories[i].created_at.strftime('%a, %d.%m.'), prev_days_path(all_stories[i].id) %>
 <% end %>
 </div>
 <div id="copy">

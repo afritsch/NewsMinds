@@ -16,7 +16,7 @@ Qpt2a::Application.routes.draw do
     match 'User/register' => "User#registration", :as => "register"
     match 'User/login' => "User#login", :as => "login"
     match 'User/create' => "User#create", :as => "create"
-    match 'User/changeMind/:answer/:post_estimation/:post_id' => "User#changeMind", :as => "user_mind"  
+    match 'User/changeMind/:answer/:post_estimation/:post_id' => "User#changeMind", :as => "user_mind", :via => :post
     match 'User/profile' => "User#edit", :as => "profile"
     match 'User/newPassword' => "User#newPassword"
     match "auth/:facebook/callback" => "User#facebookLogin"
@@ -27,7 +27,7 @@ Qpt2a::Application.routes.draw do
 
   resources :daily_news
     match 'chooseTheme' => "DailyNews#chooseTheme", :as => "choose_theme"
-    match 'votedTheme/:id' => "DailyNews#voteForTheme"
+    match 'daily_news/:id' => "DailyNews#voteForTheme", :via => :post
  
  
   get "top_stories/discussion"

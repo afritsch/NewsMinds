@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222172116) do
+ActiveRecord::Schema.define(:version => 20120123145751) do
 
   create_table "daily_news", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "date"
     t.integer  "clicks"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "theme_url"
   end
 
   create_table "posts", :force => true do |t|
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20111222172116) do
   create_table "top_stories", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "pubDate"
     t.integer  "chosen"
     t.datetime "created_at"
     t.datetime "updated_at"

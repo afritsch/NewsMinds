@@ -7,7 +7,7 @@ class CreateTopStories < ActiveRecord::Migration
       t.integer :chosen
 
       t.timestamps
-    end
+    end	
   end
 
   def self.down
