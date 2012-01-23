@@ -1,0 +1,46 @@
+﻿* this file was written in a hurry, sorry for the german *
+
+präsentation 09.01.2012
+-----------------------
+
+*- change functionality of facebook login
+- design
+*- change startpage content
+*- links to full articles
+- redirects
+*- safety - change some methods from get to post
+- comment pages (display only last 10 comments)
+*- comment time and dates
+
+
+code review 16.01.2012
+----------------------
+
+(unsere ideen)
+- default werte nicht im controller setzen sondern in migration
+- whenever code cleanup
+
+(michael)
+*- routes.rb zeilen 25,26 in ressourcen block,  zeile 52 obsolet
+- camelCase vermeiden
+- kein 1:1 mapping
+*- schema.rb date ist string
+*- code cleanup (ua daly_news) 
+*- daily_news_controller.rb zeilen 12+16 vereinfachen
+- daily_news bzw top_story tabelle doppelt, nicht benötigt?
+- votefortheme in before_filter
+*- methode userposts in posts_controller umbenennen? new methode if vereinfachen
+*- user.rb loggedinuser
+  stattdessen user.find(1)
+- posts_controller default werte, create methode hidden field (?)
+*- post.rb
+  def estimation=(val)
+    write_attribute(:estimation, val == "positiv" ? 1 : 0)
+  end
+  um zusätzliches zu machen
+  def estimation
+    read_attribute(:estimation)
+  end
+- user_controller vereinfachen, doesuserexist entfernen model validates_existenceo_of
+- numberofnegposts vereinfachen zu count
+- rails updaten zu 3.1?
