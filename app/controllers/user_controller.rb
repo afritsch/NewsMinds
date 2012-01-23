@@ -79,12 +79,12 @@ class UserController < ApplicationController
         end
         
         user.password = Digest::SHA1.hexdigest(user.password)
-        user.numberOfPosCreatedPosts = 0 
-        user.numberOfNegCreatedPosts = 0 
-        user.numberOfPosVotedPosts = 0 
-        user.numberOfNegVotedPosts = 0 
-        user.mind = 0
-        user.votePower = 1
+        #user.numberOfPosCreatedPosts = 0 
+        #user.numberOfNegCreatedPosts = 0 
+        #user.numberOfPosVotedPosts = 0 
+        #user.numberOfNegVotedPosts = 0 
+        #user.mind = 0
+        #user.votePower = 1
         
         user.save
         redirect_to(root_path, :notice => "Erfolgreich registriert")

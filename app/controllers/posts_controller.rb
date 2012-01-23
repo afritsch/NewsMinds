@@ -3,13 +3,13 @@
 class PostsController < ApplicationController
   before_filter :getPost, :only => [:edit] 
 
-  def userPosts 
+  def index 
     @posts = User.where( :id => session[:id] ).first.posts
   end
 
 
   def new
-    if !session[:id].nil?
+    if session[:id]
       @post = Post.new
 
       @top_story = TopStory.find( params[:top_story_id] )
@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
   def update
     Post.find( params[:id] ).update_attributes( params[:post] ) 
-    redirect_to(myposts_path, :notice => "Kommentar erfolgreich geändert")
+    redirect_to(posts_path, :notice => "Kommentar erfolgreich geändert")
   end 
    
    

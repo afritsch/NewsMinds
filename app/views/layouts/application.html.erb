@@ -67,8 +67,8 @@ NewsMinds
 
 <li><%= link_to 'Archiv', archive_path %></li>
 
-<% if isUserLoggedIn %>
-  <li><%= link_to 'Kommentare', myposts_path %></li>
+<% if session[:id] %>
+  <li><%= link_to 'Kommentare', posts_path %></li>
   <li><%= link_to 'Profil', profile_path %></li>
 <% end %>
 </ul>
@@ -89,9 +89,9 @@ NewsMinds
 
 <div id="rightbar">
 
-<% if isUserLoggedIn  %>
+<% if session[:id]  %>
   
-  <% user = User.loggedInUser( session[:id] ) %>
+  <% user = User.find( session[:id] ) %>
 
     Eingeloggt als<br />
     <span class="username"><%= user.username %></span><br />

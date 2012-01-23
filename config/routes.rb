@@ -21,10 +21,6 @@ Qpt2a::Application.routes.draw do
     match 'User/newPassword' => "User#newPassword"
     match "auth/:facebook/callback" => "User#facebookLogin"
   
-
-  get "daily_news/chooseTheme"
-  get "daily_news/voteForTheme" 
-
   resources :daily_news
     match 'chooseTheme' => "DailyNews#chooseTheme", :as => "choose_theme"
     match 'daily_news/:id' => "DailyNews#voteForTheme", :via => :post
@@ -44,7 +40,5 @@ Qpt2a::Application.routes.draw do
 
   resources :posts
     match "posts/:top_story_id/new" => "Posts#new", :as => "new_post"
-    match "posts/:id/edit" => "Posts#edit", :as => "edit_post"
-    match "myposts" => "Posts#userPosts", :as => "myposts"
-
+   
 end

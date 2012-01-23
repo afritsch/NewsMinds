@@ -19,7 +19,6 @@ class TopStory < ActiveRecord::Base
   #  story = TopStory.new
   #  story.title = news.title
   #  story.description = news.description
-  #  story.pubDate = Time.now.to_s
   #  story.chosen = news.clicks
   #  story.save
   #end
@@ -33,7 +32,6 @@ class TopStory < ActiveRecord::Base
   #    news = DailyNews.new
   #    news.title = @raw_data.items[i].title
   #    news.description = @raw_data.items[i].description
-  #    news.date = @raw_data.items[i].pubDate.to_s
   #    news.clicks = 0
   #    news.save       
   #  end

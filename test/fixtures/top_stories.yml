@@ -3,11 +3,9 @@
 one:
   title: MyString
   description: MyText
-  pubDate: MyString
   chosen: 1
 
 two:
   title: MyString
   description: MyText
-  pubDate: MyString
   chosen: 1

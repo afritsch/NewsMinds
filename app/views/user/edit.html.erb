@@ -6,7 +6,7 @@
 <% form_for @user, :url => { :action => "newPassword" } do |u| %>
 
 <tr><td> Altes Password eingeben, um neues zu erstellen:</td></tr>
-<tr><td><input type="text" name="oldPassword" /></td></tr>
+<tr><td><input type="password" name="oldPassword" /></td></tr>
 <tr><td><%= u.submit ' Neues Passwort ' %></td></tr>
 <% end %>
 

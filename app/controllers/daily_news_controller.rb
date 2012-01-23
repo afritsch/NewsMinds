@@ -9,11 +9,11 @@ class DailyNewsController < ApplicationController
 
   def voteForTheme
    
-    if cookies[:voted] != nil 
+    if cookies[:voted] 
       redirect_to(choose_theme_path, :notice => "Du hast schon abgestimmt")
     else
      
-      if !session[:id].nil?
+      if session[:id]
  
         cookies[:voted] = { :value => "voted", :expires => 20.hours.from_now } 
         
