@@ -1,0 +1,25 @@
+﻿<%# Copyright (C) <2012> <Bruenner Franz Josef, Fritsch Andreas> %>
+
+<h2>Eigene Kommentare</h2>
+
+<% if @posts.empty? %>
+<h4>Noch keine Kommentare vorhanden</h4>
+
+<% else %>
+  <% @posts.each do |post| %>
+
+  <div class="postdetails">
+  <span class="voted">Tagesthema: </span><%= post.top_story.title %><br />
+  <span class="voted">Kommentar: </span><span class="italic"><%= post.title %></span><%= link_to 'Kommentar ändern', edit_post_path(post.id) %><br />
+  <span class="voted">Score:</span> <%= post.score %> <span class="voted">Bewertung: </span> 
+  <% if post.estimation == 1 %>
+    Positiv
+  <% else %>
+    Negativ
+  <% end %>
+  </div>
+  
+  
+  <% end %>
+
+<% end %>
