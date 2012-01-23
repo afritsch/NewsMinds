@@ -103,7 +103,7 @@ class UserController < ApplicationController
     
     user = User.where( :id => session[:id] ).first
     
-    if !params[:user][:password].nil?
+    if params[:user][:password]
       
       user.password = params[:user][:password]
     
@@ -117,7 +117,7 @@ class UserController < ApplicationController
 
     end
   
-    if !params[:user][:facebookEmail].nil?
+    if params[:user][:facebookEmail]
     
       if doesFacebookEmailExist?( params[:user][:facebookEmail] )
         redirect_to(profile_path, :notice => "FacebookEmail schon vorhanden.") 
@@ -140,11 +140,11 @@ class UserController < ApplicationController
     
     doesExist = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
     
-    if doesExist.nil?
+    if !doesExist.empty?
       
-      changeVotePower(valid)
+      changeVotePower(doesExist)
       
-      session[:id] = valid.id
+      session[:id] = doesExist.id
 
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
@@ -154,7 +154,7 @@ class UserController < ApplicationController
       
       @user = User.new( :username => username, :facebookEmail => fbHash['extra']['user_hash']['email'] )
       
-      redirect_to(register_path)
+      redirect_to(register_path, :notice => "Bitte Passwort eingeben, um sich vollständig zu registrieren")
     end
     
   end
