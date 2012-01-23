@@ -18,7 +18,7 @@ class DailyNewsController < ApplicationController
         cookies[:voted] = { :value => "voted", :expires => 20.hours.from_now } 
         
         @voted_news = DailyNews.where( :id => params[:id] )
-        @voted_news[0].clicks += User.loggedInUser( session[:id] ).votePower
+        @voted_news[0].clicks += User.find( session[:id] ).votePower
         @voted_news[0].save
 
       else

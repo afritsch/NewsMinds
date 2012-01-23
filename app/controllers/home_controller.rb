@@ -17,5 +17,11 @@ class HomeController < ApplicationController
     @latest_posts = @latest_top_story.posts.order("id DESC").limit(3)
     
   end
+  
+  def about
+  end
+  
+  def impressum
+  end
 
 end

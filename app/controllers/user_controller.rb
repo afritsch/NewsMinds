@@ -9,7 +9,7 @@ class UserController < ApplicationController
   # increases or decreases post score that is related to a user
   # note that this affects another user's mind
   def changeMind
-    if !session[:id].nil?
+    if session[:id]
       
       changeNumberOfVotedPosts( params[:post_estimation] )
 
@@ -48,7 +48,7 @@ class UserController < ApplicationController
    
     @user = User.where( :username => params[:username], :password => Digest::SHA1.hexdigest(params[:password]) ).first
 
-      if !@user.nil?
+      if @user
         
         changeVotePower(@user)
         
@@ -70,7 +70,7 @@ class UserController < ApplicationController
  
   def create
     user = User.new(params[:user])
-    
+      
       if !doesUserExist?(user.username) && !doesFacebookEmailExist?(user.facebookEmail)
         
         if !user.valid?
@@ -79,12 +79,12 @@ class UserController < ApplicationController
         end
         
         user.password = Digest::SHA1.hexdigest(user.password)
-        #user.numberOfPosCreatedPosts = 0 
-        #user.numberOfNegCreatedPosts = 0 
-        #user.numberOfPosVotedPosts = 0 
-        #user.numberOfNegVotedPosts = 0 
-        #user.mind = 0
-        #user.votePower = 1
+        user.numberOfPosCreatedPosts = 0 
+        user.numberOfNegCreatedPosts = 0 
+        user.numberOfPosVotedPosts = 0 
+        user.numberOfNegVotedPosts = 0 
+        user.mind = 0
+        user.votePower = 1
         
         user.save
         redirect_to(root_path, :notice => "Erfolgreich registriert")
@@ -172,16 +172,17 @@ class UserController < ApplicationController
   private
 
   def getUser
-    @user = User.loggedInUser( session[:id] )
+    @user = User.find( session[:id] )
   end
   
   
   def doesUserExist?(username)
      
+    upperCaseUsername = User.all
+    
     for i in 0...User.count
-      upperCaseUsername = User.all[i].username.upcase
       
-      if username.upcase == upperCaseUsername
+      if username.upcase == upperCaseUsername[i].username.upcase
         return true
       end        
     end

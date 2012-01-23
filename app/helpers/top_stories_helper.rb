@@ -4,7 +4,7 @@ module TopStoriesHelper
   def hasUserAlreadyVoted(usernames, logged_in_user_id)
     
     username_array = usernames.split(" ")
-    current_logged_in_user = User.loggedInUser( logged_in_user_id )
+    current_logged_in_user = User.find( logged_in_user_id )
     
     username_array.each do |username|
       if current_logged_in_user.username == username
@@ -18,7 +18,7 @@ module TopStoriesHelper
   
 
   def doesPostBelongToUser(logged_in_user_id, post_of_user)
-    if User.loggedInUser( logged_in_user_id ).username != post_of_user
+    if User.find( logged_in_user_id ).username != post_of_user
       return false
     else
       return true

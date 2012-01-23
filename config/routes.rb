@@ -7,8 +7,10 @@ Qpt2a::Application.routes.draw do
   get "home/index"
   
   resources :home
-
-  
+    match 'about' => "Home#about", :as => "about"
+    match 'impressum' => "Home#impressum", :as => "impressum"
+    
+    
   get "user/register"
 
   resources :user

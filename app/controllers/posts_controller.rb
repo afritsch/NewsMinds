@@ -30,18 +30,10 @@ class PostsController < ApplicationController
     post.user_id = params[:user_id]
     post.score = 0
     post.voted_usernames = ""
-
-
-    if params[:estimation] == "positiv" 
-      post.estimation = 1
-
-      post.user.numberOfPosCreatedPosts += 1
-    else
-      post.estimation = 0
-
-      post.user.numberOfNegCreatedPosts += 1
-    end
-
+    
+    post.estimation = params[:estimation]
+    post.user.number_of_posts = params[:estimation]
+    
     valid = post.save
     
     if valid

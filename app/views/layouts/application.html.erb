@@ -70,6 +70,9 @@ NewsMinds
 <% if session[:id] %>
   <li><%= link_to 'Kommentare', posts_path %></li>
   <li><%= link_to 'Profil', profile_path %></li>
+<% else %>
+  <li><%= link_to 'About', about_path %></li>
+  <li><%= link_to 'Impressum', impressum_path %></li>
 <% end %>
 </ul>
 </div>
