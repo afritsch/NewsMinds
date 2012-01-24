@@ -137,8 +137,10 @@ class UserController < ApplicationController
     
     fbHash = request.env['omniauth.auth']
     
-    
     doesExist = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
+    
+    redirect_to(root_path, :notice => fbHash['extra']['user_hash']['first_name'] + fbHash['extra']['user_hash']['last_name'] )
+    return 
     
     if !doesExist.empty?
       
