@@ -147,7 +147,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano
-  mysql2 (= 0.2.18)
+  mysql2 (~> 0.2.18)
   omniauth (= 0.1.6)
   rails (= 3.0.9)
   sqlite3-ruby
