@@ -139,7 +139,7 @@ class UserController < ApplicationController
     
     doesExist = User.where(:facebookEmail => fbHash['extra']['user_hash']['email']).first
     
-    #if !doesExist.empty?
+    if doesExist
       
       changeVotePower(doesExist)
       
@@ -147,12 +147,14 @@ class UserController < ApplicationController
 
       redirect_to(root_path, :notice => "Erfolgreich eingeloggt")
       
-    #else
+    else
       
-     # @user = User.new( :facebookEmail => fbHash['extra']['user_hash']['email'] )
+      username = fbHash['extra']['user_hash']['first_name'] + fbHash['extra']['user_hash']['last_name']
       
-      #redirect_to(register_path, :notice => "Bitte Passwort eingeben, um sich vollständig zu registrieren")
-    #end
+      @user = User.new( :username => username, :facebookEmail => fbHash['extra']['user_hash']['email'] )
+      
+      redirect_to(register_path, :notice => "Bitte Passwort eingeben, um sich vollständig zu registrieren")
+    end
     
   end
   
