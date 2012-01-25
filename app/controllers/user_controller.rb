@@ -153,7 +153,7 @@ class UserController < ApplicationController
       
       @user = User.new( :facebookEmail => fbHash['extra']['user_hash']['email'] )
       
-      redirect_to(register_path, :notice => "Bitte Usernamen und Passwort eingeben, um sich vollständig zu registrieren")
+      redirect_to(register_path, :notice => "Bitte Userdaten mit der Facebook Email Adresse ausfüllen, um sich vollständig zu registrieren")
     end
     
   end
