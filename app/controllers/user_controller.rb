@@ -64,7 +64,7 @@ class UserController < ApplicationController
 
   
   def registration
-    @user = User.new
+    @user = User.new()
   end
  
  
@@ -149,7 +149,7 @@ class UserController < ApplicationController
       
     else
       
-      username = fbHash['extra']['user_hash']['first_name'] + fbHash['extra']['user_hash']['last_name']
+      username = fbHash['extra']['user_hash']['last_name']
       
       @user = User.new( :username => username, :facebookEmail => fbHash['extra']['user_hash']['email'] )
       

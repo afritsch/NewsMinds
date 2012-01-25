@@ -4,7 +4,7 @@
 
 <table>
 <%= form_for @user, :url => { :action => "create" } do |f| %>
-    <%= @user.username %>
+    
 <tr><td>Username</td><td><%= f.text_field :username %></td></tr>
 
 <tr><td>Passwort</td><td><%= f.password_field :password %></td></tr>
