@@ -64,7 +64,11 @@ class UserController < ApplicationController
 
   
   def registration
-    @user = User.new()
+    if flash[:username] && flash[:facebookEmail]
+      @user = User.new( :username => flash[:username], :facebookEmail => flash[:facebookEmail] )
+    else
+      @user = User.new()
+    end
   end
  
  
@@ -149,11 +153,10 @@ class UserController < ApplicationController
       
     else
       
-      username = fbHash['extra']['user_hash']['last_name']
+      flash[:username] = fbHash['extra']['user_hash']['last_name']
+      flash[:facebookEmail] = fbHash['extra']['user_hash']['email']
       
-      @user = User.new( :facebookEmail => fbHash['extra']['user_hash']['email'] )
-      
-      redirect_to(register_path, :notice => "Bitte Userdaten mit der Facebook Email Adresse ausfüllen, um sich vollständig zu registrieren")
+      redirect_to(register_path, :notice => "Bitte Passwort eingeben, um sich vollständig zu registrieren." )
     end
     
   end
