@@ -3,6 +3,7 @@
 class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true, :format => { :with => /^\D{1,1}\S{3,}$/ }
   validates :password, :presence => true, :format => { :with => /^\S{6,}$/ }
+  validates :facebookEmail, :uniqueness => true
   
   has_many :posts, :dependent => :destroy
   

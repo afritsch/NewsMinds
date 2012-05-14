@@ -6,7 +6,7 @@
 	  
     <div class="choosetheme">
     
-    <%= link_to(news, :method => :post) do %>
+    <%= link_to news, :method => :post, :id => news.id do %>
       <span class="themeheader"><%= news.title %></span>
       <%= raw news.description %>
 	  <% end %>

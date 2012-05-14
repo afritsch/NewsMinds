@@ -83,7 +83,7 @@ class NewsHandler
   
   # if the first feed is up to date data must not be loaded in again 
   def isDataUpToDate?
-    DailyNews.first.date.slice(5..6).eql? Time.now.to_s.slice(8..9)
+    DailyNews.first.updated_at.to_s.slice(5..6).eql? Time.now.to_s.slice(8..9)
   end
  
   

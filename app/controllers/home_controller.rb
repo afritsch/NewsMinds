@@ -10,6 +10,8 @@ class HomeController < ApplicationController
       handler.eraseOldTopStoryEntries # erases old top stories except youngest
     end
     
+    handler.checkThemeList
+     
     @latest_top_story = TopStory.last
     
     numPosts = @latest_top_story.posts.count

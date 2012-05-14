@@ -14,7 +14,6 @@ gem 'omniauth', '0.1.6'
 
 # Deploy with Capistrano
 gem 'capistrano'
-
 #gem 'whenever', :require => false
 
 #
@@ -35,6 +34,16 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-group :production do
-  gem 'mysql2', "~> 0.2.18"
+group :test do
+  gem 'capybara'
+  gem 'shoulda-context'
+  gem 'shoulda'
+  gem 'machinist'
+  gem 'timecop'
+  gem 'webrat'
+  gem 'database_cleaner'
 end
+
+#group :production do
+#  gem 'mysql2', "~> 0.2.18"
+#end
