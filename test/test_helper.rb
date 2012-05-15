@@ -2,6 +2,8 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
+require 'rss/1.0'
+require 'rss/2.0'
 
 class ActionDispatch::IntegrationTest
  include Capybara::DSL
@@ -28,6 +30,25 @@ class ActiveSupport::TestCase
     user = User.new(user_params)
     user.save
     user    
+  end
+  
+  
+  def loadRSSFeeds 
+    @raw_data = RSS::Parser.parse('http://www.nachrichten.at/storage/rss/rss/weltspiegel.xml', false)
+  end
+  
+  
+  def copyRSSIntoDatabase
+    DailyNews.destroy_all
+
+    for i in 0...@raw_data.items.count do
+      news = DailyNews.new
+      news.title = @raw_data.items[i].title
+      news.description = @raw_data.items[i].description
+      news.clicks = 0
+      news.theme_url = @raw_data.items[i].link.to_s
+      news.save       
+    end
   end
   
 end
