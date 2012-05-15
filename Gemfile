@@ -41,6 +41,7 @@ group :test do
   gem 'machinist'
   gem 'timecop'
   gem 'webrat'
+  gem 'fakeweb'
   gem 'database_cleaner'
 end
 
