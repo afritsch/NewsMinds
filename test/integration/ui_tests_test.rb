@@ -34,16 +34,14 @@ class UiTestsTest < ActionDispatch::IntegrationTest
   
   test "user wants to cahnge their profile" do 
     
-    session = Capybara::Session.new(:id)
+    visit profile_path
+    fill_in 'oldPassword', :with => @password
+    click_button ' Neues Passwort '
+    fill_in 'user_password', :with => "geheim2"
+    click_button 'user_submit'
     
-    session.visit profile_path
+    page.has_content?('geheim2')
     
-    session.fill_in 'oldPassword', :with => @password
-    session.click_button ' Neues Passwort '
-    session.fill_in 'user_password', :with => "geheim2"
-    session.click_button 'user_submit'
-    
-    session.page.has_content?('geheim2')
   end
   
   test "user is selecting a story" do

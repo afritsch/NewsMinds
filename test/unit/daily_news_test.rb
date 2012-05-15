@@ -127,7 +127,18 @@ class DailyNewsTest < ActiveSupport::TestCase
   def teardown
   end
   
-  test "list all daily news without top story" do
+  test "is DailyNews-list complete?" do
+    
+    DailyNews.all.each do |news| 
+      assert_not_equal nil, news.title
+      assert_not_equal nil, news.description
+      assert_not_equal nil, news.clicks
+      assert_not_equal nil, news.theme_url
+    end
+    
+  end
+  
+  test "list all DailyNews without top story" do
     
     story = TopStory.create( :title => DailyNews.find( (rand * DailyNews.all.count).floor ).title, :description => DailyNews.find( (rand * DailyNews.all.count).floor ).description, :chosen => 0 )
     
@@ -138,4 +149,5 @@ class DailyNewsTest < ActiveSupport::TestCase
     end
     
   end
+  
 end
