@@ -2,6 +2,8 @@ require 'test_helper'
 
 class DailyNewsTest < ActiveSupport::TestCase
 
+  # Franz Josef Brünner Tests
+  
   setup do
   
     content = "<?xml version='1.0' encoding='ISO-8859-15'?>

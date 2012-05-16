@@ -2,6 +2,8 @@ require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
   
+  # Franz Josef Brünner Tests
+  
   setup do
     story = TopStory.create( :title => "teststory", :description => "test description", :chosen => 0 )
     user = User.create( :username => "Mr.Test", :password => "geheim", :numberOfPosVotedPosts => 0, :numberOfNegVotedPosts => 0, :numberOfPosCreatedPosts => 0, :numberOfNegCreatedPosts => 0, :mind => 10, :votePower => 1, :facebookEmail => "mr.test@test.com" )

@@ -1,7 +1,9 @@
-require 'test_helper'
+require 'integration_test_helper'
 
 class UiTestsTest < ActionDispatch::IntegrationTest
   #fixtures :all
+  
+  # Franz Josef Brünner Tests
   
   setup do 
     @username = 'Mr.Test'
@@ -23,37 +25,55 @@ class UiTestsTest < ActionDispatch::IntegrationTest
     DailyNews.destroy_all
   end
   
+  test "user is registering" do
+    visit register_path #root_path
+    fill_in 'username', :with => @dummy_user.username
+    fill_in 'password', :with => @dummy_user.password
+    fill_in 'facebookEmail', :with => @dummy_user.facebookEmail
+    
+    click_button ' Registrieren '
+    assert page.has_content?('Erfolgreich registriert')
+  end
+  
   test "user is trying to log in" do
     visit root_path #root_path
-    fill_in 'username', :with => "Mr.Test"
-    fill_in 'password', :with => "geheim"
+    fill_in 'username', :with => @dummy_user.username
+    fill_in 'password', :with => @dummy_user.password
     
     click_button ' Login '
-    page.has_content?(' Logout ')
+    assert page.has_content?(' Logout ')
   end
   
-  test "user wants to cahnge their profile" do 
+  test "user has entered wrong username" do
+    visit root_path #root_path
+    fill_in 'username', :with => @dummy_user.username.to_s << "_"
+    fill_in 'password', :with => @dummy_user.password
     
-    visit profile_path
-    fill_in 'oldPassword', :with => @password
-    click_button ' Neues Passwort '
-    fill_in 'user_password', :with => "geheim2"
-    click_button 'user_submit'
-    
-    page.has_content?('geheim2')
+    click_button ' Login '
+    assert page.has_content?(' Login ')
     
   end
   
-  test "user is selecting a story" do
-    #visit choose_theme_path
+  test "user has entered wrong password" do
+    visit root_path #root_path
+    fill_in 'username', :with => @dummy_user.username
+    fill_in 'password', :with => "_" << @dummy_user.password.to_s
     
-    #cookies[:voted] = { :value => "voted", :expires => 23.hours.from_now } 
-    
-    #Timecop.freeze(Date.today + 1) do
-    #  visit '/chooseTheme'
-    #  click_link('/daily_news/'+DailyNews.last.id.to_s)
-    #  page.has_content?('choosetheme')
-    #end
+    click_button ' Login '
+    assert page.has_content?(' Login ')
     
   end
+  
+  test "user wants to change their profile" do 
+    
+    #visit profile_path
+    #fill_in 'oldPassword', :with => @password
+    #click_button ' Neues Passwort '
+    #fill_in 'user_password', :with => "geheim2"
+    #click_button 'user_submit'
+    
+    #page.has_content?('geheim2')
+    
+  end
+  
 end

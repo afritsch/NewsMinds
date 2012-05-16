@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class TopStoryTest < ActiveSupport::TestCase
+
+  # Franz Josef Brünner Tests
+  
   setup do
     @top_story_params = { :title => "teststory", :description => "test description", :chosen => 0 }
   end

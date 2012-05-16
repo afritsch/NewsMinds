@@ -43,6 +43,7 @@ group :test do
   gem 'webrat'
   gem 'fakeweb'
   gem 'database_cleaner'
+  gem 'launchy'
 end
 
 #group :production do

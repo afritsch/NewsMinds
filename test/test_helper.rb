@@ -24,6 +24,8 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   #fixtures :all
 
+  # Franz Josef Brünner Tests
+  
   def create_dummy_user(username, password, facebookEmail)
     user_params = { :username => username, :password => password, :numberOfPosVotedPosts => 0, :numberOfNegVotedPosts => 0, :numberOfPosCreatedPosts => 0, :numberOfNegCreatedPosts => 0, :mind => 0, :votePower => 1, :facebookEmail => facebookEmail }
     

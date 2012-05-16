@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
+  # Franz Josef Brünner Tests
+  
   setup do
     @user_params = { :username => "Mr.Test", :password => "geheim", :numberOfPosVotedPosts => 0, :numberOfNegVotedPosts => 0, :numberOfPosCreatedPosts => 0, :numberOfNegCreatedPosts => 0, :mind => 10, :votePower => 1, :facebookEmail => "mr.test@test.com" }
   end
