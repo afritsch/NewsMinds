@@ -28,9 +28,17 @@ class PostTest < ActiveSupport::TestCase
     User.destroy_all
   end
   
-  test "is post linked to user and TopStory succesfully?" do
+  test "is Post linked to user and TopStory succesfully?" do
     assert_not_equal nil, @post.user
     assert_not_equal nil, @post.top_story
+  end
+  
+  test "is Post estimated correctly?" do
+    
+    post = Post.first
+    
+    post.estimation = "negative"
+    assert_equal 0, post.estimation
   end
   
 end

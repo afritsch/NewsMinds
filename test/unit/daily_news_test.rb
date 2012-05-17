@@ -4,7 +4,7 @@ class DailyNewsTest < ActiveSupport::TestCase
 
   # Franz Josef Brünner Tests
   
-  setup do
+  def setupDailyNewsList
   
     content = "<?xml version='1.0' encoding='ISO-8859-15'?>
 <rss version='2.0' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:admin='http://webns.net/mvcb/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:content='http://purl.org/rss/1.0/modules/content/'>
@@ -130,6 +130,7 @@ class DailyNewsTest < ActiveSupport::TestCase
   end
   
   test "is DailyNews-list complete?" do
+    setupDailyNewsList
     
     DailyNews.all.each do |news| 
       assert_not_equal nil, news.title
@@ -141,6 +142,7 @@ class DailyNewsTest < ActiveSupport::TestCase
   end
   
   test "list all DailyNews without top story" do
+    setupDailyNewsList
     
     story = TopStory.create( :title => DailyNews.find( (rand * DailyNews.all.count).floor ).title, :description => DailyNews.find( (rand * DailyNews.all.count).floor ).description, :chosen => 0 )
     

@@ -26,4 +26,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal user_one.facebookEmail, user_two.facebookEmail
   end
   
+  test "User is voted by Post" do
+    user = User.new(@user_params)
+    
+    tmpNum = user.numberOfPosCreatedPosts
+    user.number_of_posts = 'positiv'
+    
+    assert_equal tmpNum+1, user.numberOfPosCreatedPosts
+  end
+  
 end

@@ -7,7 +7,7 @@ require 'rss/2.0'
 
 class ActionDispatch::IntegrationTest
  include Capybara::DSL
-
+ 
  teardown do
   DatabaseCleaner.clean  
   Capybara.reset_sessions!    # Forget the (simulated) browser state

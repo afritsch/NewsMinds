@@ -35,6 +35,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
   gem 'capybara'
   gem 'shoulda-context'
   gem 'shoulda'
