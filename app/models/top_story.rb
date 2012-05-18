@@ -9,4 +9,8 @@ class TopStory < ActiveRecord::Base
     created_at.strftime('%d').eql? Time.now.strftime('%d')
   end
   
+  def hasDeadlineEnded?
+    Time.now.to_s.slice(11..12).to_i > 11 
+  end
+  
 end
