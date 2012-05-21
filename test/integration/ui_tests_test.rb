@@ -1,4 +1,5 @@
 require 'integration_test_helper'
+require 'digest/sha1'
 
 class UiTestsTest < ActionDispatch::IntegrationTest
   #fixtures :all
@@ -9,13 +10,13 @@ class UiTestsTest < ActionDispatch::IntegrationTest
     @username = 'Mr.Test'
     @password = 'geheim'
     @facebookEmail = 'mr.test@test.com'
+    @dummy_user = create_dummy_user(@username, Digest::SHA1.hexdigest(@password), @facebookEmail)
     
-    @dummy_user = create_dummy_user(@username, @password, @facebookEmail)
     
     @top_story_params = { :title => "teststory", :description => "test description", :chosen => 0 }
     TopStory.create(@top_story_params)
     
-    @daily_news_params = { :title => "teststory", :description => "test description", :clicks => 0, :theme_url => "www.test.com" }
+    @daily_news_params = { :title => "testdailynews", :description => "test description", :clicks => 0, :theme_url => "www.test.com" }
     DailyNews.create(@daily_news_params)
   end
    
@@ -46,12 +47,15 @@ class UiTestsTest < ActionDispatch::IntegrationTest
   end
   
   test "user is trying to log in with correct userinfo" do # this test has to go through in ordner to set session[:id] for next tests
+    
     visit root_path
     fill_in 'username', :with => @dummy_user.username
-    fill_in 'password', :with => @dummy_user.password
+    fill_in 'password', :with => @password
     
     click_button ' Login '
+    
     assert_equal true, page.has_button?(' Logout ')
+    
   end
   
   test "user has entered wrong username" do
@@ -82,16 +86,42 @@ class UiTestsTest < ActionDispatch::IntegrationTest
   
   test "user wants to change their password" do 
     
-    #Capybara.using_session("id") do
-    #  visit profile_path
-     # fill_in 'oldPassword', :with => @password
-    #  click_button ' Neues Passwort '
-     # fill_in 'user_password', :with => "geheim2"
-      #click_button 'user_submit'
+    Capybara.using_session("id") do
+       
+      visit root_path
+      fill_in 'username', :with => @dummy_user.username
+      fill_in 'password', :with => @password
     
-      #assert_equal true, page.has_content?('geheim2')
-    #end
+      click_button ' Login '
+      
+      visit profile_path
+      
+      fill_in 'oldPassword', :with => @password
+      click_button ' Neues Passwort '
+      fill_in 'user_password', :with => "geheim2"
+      click_button 'user_submit'
+      
+      assert_equal true, page.has_content?('erfolgreich')
+    end
     
+  end
+  
+  test "user votes for a DailyNews" do
+    
+    Capybara.using_session("id") do
+      
+      visit root_path
+      fill_in 'username', :with => @dummy_user.username
+      fill_in 'password', :with => @password
+    
+      click_button ' Login '
+      
+      visit choose_theme_path
+      
+      click_link DailyNews.first.id.to_s
+      
+      assert_equal true, page.has_content?(' gestimmt')
+    end
   end
   
 end

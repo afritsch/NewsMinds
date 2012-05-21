@@ -45,9 +45,8 @@ class UserController < ApplicationController
 
 
   def login 
-   
     @user = User.where( :username => params[:username], :password => Digest::SHA1.hexdigest(params[:password]) ).first
-
+    
       if @user
         
         changeVotePower(@user)
