@@ -118,8 +118,8 @@ class UiTestsTest < ActionDispatch::IntegrationTest
       
       visit profile_path
       
-      fill_in 'user_facebookEmail', :with => @facebookEmail
-      click_button 'user_submit'
+      fill_in 'user_facebookEmail', :with => "mr.test2@test.com"
+      click_button 'facebookEmail'
       
       assert_equal true, page.has_content?('erfolgreich')
     end
