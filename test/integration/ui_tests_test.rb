@@ -1,10 +1,18 @@
-require 'integration_test_helper'
 require 'digest/sha1'
 
 class UiTestsTest < ActionDispatch::IntegrationTest
   #fixtures :all
   
   # Franz Josef Brünner Tests
+  
+  
+  def loginDummyUser
+    visit root_path
+    fill_in 'username', :with => @dummy_user.username
+    fill_in 'password', :with => @password
+    
+    click_button ' Login '
+  end
   
   setup do 
     @username = 'Mr.Test'
@@ -76,7 +84,7 @@ class UiTestsTest < ActionDispatch::IntegrationTest
     Capybara.using_session("id") do
       visit root_path
       fill_in 'username', :with => @dummy_user.username.to_s
-      fill_in 'password', :with => @dummy_user.password.to_s << "_"
+      fill_in 'password', :with => @password << "_"
     
       click_button ' Login '
       assert_equal true, page.has_content?('Falsche Eingabe')
@@ -88,11 +96,7 @@ class UiTestsTest < ActionDispatch::IntegrationTest
     
     Capybara.using_session("id") do
        
-      visit root_path
-      fill_in 'username', :with => @dummy_user.username
-      fill_in 'password', :with => @password
-    
-      click_button ' Login '
+      loginDummyUser
       
       visit profile_path
       
@@ -106,15 +110,27 @@ class UiTestsTest < ActionDispatch::IntegrationTest
     
   end
   
+  test "user wants to change their Facebook-Email Address" do 
+    
+    Capybara.using_session("id") do
+       
+      loginDummyUser
+      
+      visit profile_path
+      
+      fill_in 'user_facebookEmail', :with => @password
+      click_button 'user_submit'
+      
+      assert_equal true, page.has_content?('erfolgreich')
+    end
+    
+  end
+  
   test "user votes for a DailyNews" do
     
     Capybara.using_session("id") do
       
-      visit root_path
-      fill_in 'username', :with => @dummy_user.username
-      fill_in 'password', :with => @password
-    
-      click_button ' Login '
+      loginDummyUser
       
       visit choose_theme_path
       

@@ -13,6 +13,6 @@
 <% form_for @user do |u| %>
 <tr><td>Facebook-Email:</td></tr>
 <tr><td><%= u.text_field :facebookEmail %></td></tr>
-<tr><td><%= u.submit ' Ändern ' %></td></tr>
+<tr><td><%= u.submit :facebookEmail %></td></tr>
 <% end %>
 </table>

@@ -2,6 +2,7 @@ require 'test_helper'
 
 class NoneUiTestsTest < ActionDispatch::IntegrationTest
   #fixtures :all
+  
   setup do 
     @username = 'Mr.Test'
     @password = 'geheim'
