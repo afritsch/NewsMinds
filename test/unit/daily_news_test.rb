@@ -144,7 +144,11 @@ class DailyNewsTest < ActiveSupport::TestCase
   test "list all DailyNews without top story" do
     setupDailyNewsList
     
-    story = TopStory.create( :title => DailyNews.find( (rand * DailyNews.all.count).floor ).title, :description => DailyNews.find( (rand * DailyNews.all.count).floor ).description, :chosen => 0 )
+    _rand = (rand * DailyNews.all.count).floor
+    
+    _rand += 1 if rand == 0
+    
+    story = TopStory.create( :title => DailyNews.find( _rand ).title, :description => DailyNews.find( _rand ).description, :chosen => 0 )
     
     news = DailyNews.onlyThemes # story must not be in the list
     
